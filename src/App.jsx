@@ -74,10 +74,8 @@ const WeatherApp = () =>
       else
       {   
         setAutoSearch(true);
-        console.log(tempUnits);
-        
-        GetLocation(tempUnits);  
-            
+        // console.log(tempUnits);        
+        GetLocation(tempUnits);             
         
         const curLocationData = JSON.parse(localStorage.getItem('curLocationWeather'));  
         if (curLocationData) 
