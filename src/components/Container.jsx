@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import '../App.css'
 import './components.css'
 import Forecast from './Forecast.jsx';
+import TempNother from './TemperatureNother.jsx';
 
-const Container = ({ forecastData }) =>
+const Container = ({ handleSearchSubmit, searchLocation, location, setLocation, weatherData, forecastData }) =>
 {     
     console.log('weather Forecast Data', forecastData);
 
@@ -53,30 +54,36 @@ const Container = ({ forecastData }) =>
         }    
     }       
 
-        console.log('weather Forecast Data 61', forecastData.length);
-        console.log('hourly 62', hourly );
-        console.log('daily 63', daily );
+    // console.log('weather Forecast Data 61', forecastData.length);
+    // console.log('hourly 62', hourly );
+    // console.log('daily 63', daily );
 
+    return weatherData.length === 0  ? ( <>
+     Loading.... 
+     
+     </>):(
+        <>   
+            <div className='l-aside'>
+                { hourly.length > 0 && <Forecast type='hourly' title='Next 3 HOURS FORECAST' data={ hourly }/> }
+            </div> 
+                
+            { weatherData && 
+                <TempNother 
+                    handleSearchSubmit={handleSearchSubmit}
+                    searchLocation={searchLocation}
+                    location={location}  
 
-        return forecastData.length === 0  ? ( <> Loading.... </>):(
-            <div className="Main">
+                    setLocation={setLocation} 
+                    weatherData={weatherData} 
+                    daily={daily}
+                /> 
 
-                <div className="container">
-
-                    <aside className='l-aside'>
-                    { hourly.length > 0 && <Forecast type='hourly' title='Next 3 HOURS FORECAST' data={ hourly }/> }  
-                      
-                    { daily.length > 0 && <Forecast type='daily' title='Next 4 DAYS FORECAST' data={ daily } /> }
-                    </aside>
-
-                    <aside className="r-aside">
-                        
-                    </aside>  
-
-                </div>
+                // { daily.length > 0 && <Forecast type='daily' title='Next 4 DAYS FORECAST' data={ daily } /> }
+            }
+            
     
-            </div>
-        );
-    }
+        </>
+    ); 
+}
     
-    export default Container;
+export default Container;

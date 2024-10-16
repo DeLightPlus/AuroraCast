@@ -4,7 +4,7 @@ import '../App.css';
 import "./components.css";
 import { measure_units } from './constants.js'
 
-const Header = ({ isDark, setTheme, tempUnits, setTempUnits, handleSearchSubmit, searchLocation, location, setLocation}) =>
+const Header = ({ isDark, setTheme, tempUnits, setTempUnits }) =>
 {
     //9728; &#127761; 
     const curDate = getCurrentDate();
@@ -24,25 +24,7 @@ const Header = ({ isDark, setTheme, tempUnits, setTempUnits, handleSearchSubmit,
             <div className="logo-dt">
                 <h2>Weather(24/7) </h2>
                 <strong>{ curDate.day } , { curDate.time } </strong>
-            </div>            
-            
-            <div className="search">                
-                <input type="text" placeholder='Enter Location' value={ location }
-                    onChange={ event => setLocation(event.target.value) }
-                    onKeyDown={ searchLocation } />
-                
-                <div className="btn-h-group">
-                    <button className='bm-loc-btn' 
-                        onClick={handleSearchSubmit}>
-                        <div className="icn">&#128205;</div>
-                    </button>{/* &#128506; */}
-                    
-                    <button className='bm-search-btn' 
-                        onClick={handleSearchSubmit}>
-                        <div className="icn">&#128269;</div>
-                    </button>
-                </div>
-            </div>
+            </div>  
 
             <div className="settting">  
                 <div className="btn-h-group">

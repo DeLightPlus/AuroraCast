@@ -20,9 +20,12 @@ const api =
 const WeatherApp = () => 
 {
   const [isDark, setTheme] = useState(true);
+  const [isAutoSearching, setAutoSearch] = useState(true);
+  const [useLocalStorage, setUseLocalStorage] = useState(true);
+
 
   const [tempUnits, setTempUnits] = useState(measure_units.metric); //include standard || imperial || metric
-  const [isAutoSearching, setAutoSearch] = useState(true);
+  
 
   const [weatherData, setWeatherData] = useState({});
   
@@ -37,7 +40,25 @@ const WeatherApp = () =>
  
   useEffect(() => { 
     
-    handleSearchSubmit(); 
+    if(location === '' && useLocalStorage)
+    {
+        const curLocationData = JSON.parse(localStorage.getItem('curLocationWeather'));  
+        if (curLocationData) 
+        {   
+          // console.log('m_data', curLocationData.name);
+          const city = curLocationData;         
+          const cityId = city.id;     
+          // console.log('fc:id=', cityId);
+
+          setCurLocation(city);
+          setWeatherData(curLocationData);
+          LoadForecastData(cityId);  
+          
+          //console.log('local-forecasts', curLocationForecasts);
+        } 
+    }
+
+    // handleSearchSubmit(); 
   
   }, [] ) 
   
@@ -49,11 +70,16 @@ const WeatherApp = () =>
     }
   }
 
+  const saveCurrentLocation = () =>
+  {
+
+  }
+
   const handleSearchSubmit = async () =>
   {
     try
     {
-      setLoading(true);
+      // setLoading(true);
       // console.log('location=empty ', location==='');
 
       if(location !== '')
@@ -63,7 +89,7 @@ const WeatherApp = () =>
           const url = `${api.base}/weather?q=${location}&units=${tempUnits}&appid=${api.key}`;
           axios.get(url).then((response) => 
           {
-            console.log('search cityId:', response.data.id);
+            // console.log('search cityId:', response.data.id);
             setWeatherData(response.data);
             LoadForecastData(response.data.id); 
 
@@ -77,22 +103,22 @@ const WeatherApp = () =>
         // console.log(tempUnits);        
         GetLocation(tempUnits);             
         
-        const curLocationData = JSON.parse(localStorage.getItem('curLocationWeather'));  
-        if (curLocationData) 
-        {   
-          console.log('m_data', curLocationData.name);
-          const city = curLocationData;         
-          const cityId = city.id;        
+        // const curLocationData = JSON.parse(localStorage.getItem('curLocationWeather'));  
+        // if (curLocationData) 
+        // {   
+        //   console.log('m_data', curLocationData.name);
+        //   const city = curLocationData;         
+        //   const cityId = city.id;        
 
-          console.log('fc', cityId);
+        //   console.log('fc', cityId);
 
-          setCurLocation(city);
-          setWeatherData(curLocationData);
+        //   setCurLocation(city);
+        //   setWeatherData(curLocationData);
 
-          LoadForecastData(cityId);  
+        //   LoadForecastData(cityId);  
           
-          //console.log('local-forecasts', curLocationForecasts);
-        }  
+        //   //console.log('local-forecasts', curLocationForecasts);
+        // }  
 
       } 
     }
@@ -129,26 +155,33 @@ const WeatherApp = () =>
           .catch(error => {  console.error("Error fetching weather forecast data:", error);  });
   }  
 
-  console.log('autoSearch', isAutoSearching);
-  
-  console.log('loading...', loading);
+  // console.log('autoSearch', isAutoSearching);  
+  // console.log('loading...', loading);
 
   return  (
 
     <div className='WeatherApp' id={ isDark ? "light" : "dark" }>
-      
+      {console.log('weather-data:', weatherData)}
       <Header 
         isDark={isDark} setTheme={setTheme}
         tempUnits={tempUnits} setTempUnits={setTempUnits}
-              
-        handleSearchSubmit={handleSearchSubmit}
-        searchLocation={searchLocation}
-        location={location}  setLocation={setLocation}
       /> 
-      { weatherData && <TempNother weatherData={weatherData} /> }
 
-      { forecastData && <Container forecastData={forecastData}/> }
-
+      <div className="Main">
+        <div className="container">              
+          { console.log('useLS:', useLocalStorage) }
+          { 
+            (weatherData && forecastData) && 
+            <Container                 
+                handleSearchSubmit={handleSearchSubmit}
+                searchLocation={searchLocation}
+                location={location}  setLocation={setLocation}
+                weatherData={weatherData} 
+                forecastData={forecastData}
+            /> 
+          }
+        </div>
+        </div>
 
     </div>
   );

@@ -16,7 +16,7 @@ body
 
 #root 
 {
-  max-width: 1280px;
+  /* max-width: 1280px; */
   height: 100svh;
   width: 100svw;
   background-color: cadetblue;
@@ -74,7 +74,6 @@ h1 {
   z-index: -1;
 }
 
-
 .WeatherApp#dark
 {
   background-color: rgba(0, 0, 0, 0.45);
@@ -107,21 +106,20 @@ h1 {
   color: #000000;
 }
 
-
-
 ::placeholder 
 {
   color: #f8f8f8;
 }
 
-
 .WeatherApp .TempNotherDetails 
 {
   display: flex;
+  flex-direction: column;
 
   justify-content: start;
   width: 94%;
-  margin: 1rem 0rem 16px 2rem;
+  height: 88%;
+  /* margin: 1rem 0rem 16px 2rem; */
   padding: 4px 2%;
   border-radius: 5px;
   border: solid 1px whitesmoke;
@@ -131,11 +129,68 @@ h1 {
   border-top-right-radius: 0px; */
 }
 
+.TempNotherDetails .tempNclouds
+{
+  width: 100%;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.TempNotherDetails .highlights-container
+{
+  display: flex;
+  flex-direction: column;
+}
+
+.highlights
+{
+  display: flex;
+  flex-direction: row; 
+ 
+  width: 96%;
+  height: 54px;
+
+  margin: 1px 8px;
+  padding: 0rem 0rem 0rem 0rem;  
+
+  border-radius: 0px;
+  background-color: rgba(255, 255, 255, 0);
+  gap: 8px;
+}
+
+.bold 
+{
+  text-decoration: overline;
+  font-size: 18px;
+  font-weight: 700;
+  
+}
+
+.highlights .hl-box
+{
+  align-self: flex-end;
+  padding: 0px 2px; 
+  font-size: 12px;  
+  text-align: center;  
+  width: 128px;
+  border: 1px whitesmoke solid; 
+  border-radius: 5px;
+
+}
+
+.Main
+{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  padding: 10px;
+}
+
 .cloud
 {
   display: flex;
 }
-
 
 .WeatherApp .cloud p
 {
@@ -188,44 +243,17 @@ h1 {
 
  
 }
-
-.WeatherApp .highlights
+#cover-dir .wind-dir
 {
-  display: flex;
-  flex-direction: column; 
- 
-  width: 86px;
-  height: 100%;
-
-  margin: 1px 8px;
-  padding: 0rem 0rem 0rem 0rem;  
-
-  border-radius: 0px;
-  background-color: rgba(255, 255, 255, 0);
-  gap: 8px;
+  position: absolute;
+  top: 50px;
+  right: 64px;
+  font-size: 32px;
 }
 
-.bold 
-{
-  text-decoration: overline;
-  font-size: 18px;
-  font-weight: 700;
-  
-}
 
-.WeatherApp .highlights .hl-box
-{
-  align-self: flex-end;
-  padding: 0px 2px; 
-  font-size: 12px;  
-  text-align: center;  
-  width: 98px;
-  border: 1px whitesmoke solid; 
-  border-radius: 5px;
 
-}
-
-aside.l-aside
+.l-aside
 {
     display: flex;
     flex-direction: column;
@@ -233,18 +261,19 @@ aside.l-aside
     justify-content: start;
     padding-top: 8px;
     
-    width: 64%;
+    flex: 1;
+    /* width: 500px; */
     height: 100%;
     /* background: #6969690c; */
     border-bottom: 1px whitesmoke solid; 
     gap: 10px;
 }
 
-aside.r-aside
-{  
-    width: 30%;
-    height: 100%;
-    /* background: #f3f3f360; */
-    background: #6969690c;
-    border: 1px whitesmoke solid; 
+.r-aside
+{      
+  width: 400px;
+  height: 100%;
+  /* background: #f3f3f360; */
+  background: #6969690c;
+  /* border: 1px whitesmoke solid;  */
 }

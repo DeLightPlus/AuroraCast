@@ -24,8 +24,8 @@ const Forecast = ({ type, title, data }) => //
     return(
         <div className="Forecasts">
             
-            <strong>{title} </strong> 
-            <ul>  
+           
+            <ul>   <strong>{title} </strong> 
 
             {   data && type==='hourly' ? 
                 (    
@@ -79,11 +79,16 @@ const Forecast = ({ type, title, data }) => //
                     </div>    
                 ) :
                 data && type==='daily' ? (
-                    <div className='h-scroll'>
+                    <div className='v-scroll'>
                     {
                        data.map((day) => (  
                         
                         <div key={day.dt} className="box" style={{ textAlign: 'center' }}>
+
+                            <div className='cloud'> 
+                                <div className='fc_coverImg'> { weatherIcons[day.weather[0].icon] } </div>
+                            </div>                            
+
                             <div style={{ fontSize: '12px' }}>
                                 { console.log(new Date(day.dt_txt).toLocaleDateString('en-US', { day: 'numeric', month: 'short' }), ' | ', currentDate )                             }
                                 { 
@@ -91,14 +96,11 @@ const Forecast = ({ type, title, data }) => //
                                     ( <strong> Today </strong>) : 
                                     ( <strong> { new Date(day.dt_txt).toLocaleDateString('en-GB', { weekday:'short', day: 'numeric', month: 'short' })}</strong> )
                                 }
-                            </div>
-
-                            <div className='cloud'> 
-                                <div className='fc_coverImg'> { weatherIcons[day.weather[0].icon] } </div>
-                            </div>
-                            <h4> <sup>&#127777;</sup>  {day.main.temp_max.toFixed() }°C </h4>
+                            </div>                            
                             
                             <strong style={{ fontSize: '10px' }}> {day.weather[0].description}</strong>
+
+                            <h4> {day.main.temp_max.toFixed() }°C </h4>
 
                         </div>
                        ))
