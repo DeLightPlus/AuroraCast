@@ -18,7 +18,7 @@ export async function GetSetCurrent(latitude, longitude, tempUnits)
                 if (response.data) 
                 {     
                     localStorage.setItem('curLocationWeather', JSON.stringify(response.data)); 
-                    console.log('curLocationWeather-data', response.data);
+                    console.log('curLocationWeather/udadate|data', response.data);
                      
                     
                     return response.data;                          

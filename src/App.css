@@ -56,23 +56,99 @@ h1 {
 {
   width: 99%;
   height: 99vh;
-  position: relative;
+  position: absolute;
+  left: 8px;
   color: #ffffff80;
   border-radius: 5px;
   border-top-right-radius: 29px;
 }
 
-.WeatherApp:before 
+.container 
+{
+  position: relative;
+  display: flex;
+  /* flex-direction: row; */
+
+  width: 100%;
+  height: 100%;
+  gap: 16px;
+}
+
+/* Mobile styles (max-width: 768px) */
+@media only screen and (max-width: 768px) 
+{
+  *{
+    padding: 0;
+    margin: 0;
+  }
+  .WeatherApp 
+  {
+    left: 2px;
+    font-size: 16px;
+  }
+  .Main 
+  {
+    padding: 5px;
+    /* flex-direction: column; */
+  }
+  .container 
+  {
+    top: 10px;
+    left: 0;
+
+    flex-direction: column;
+    width: 90%;
+    /* margin: 20px auto; */
+  }
+
+  .r-aside
+  {
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100svw;
+  }
+}
+
+/* Tablet styles (max-width: 1024px) */
+@media only screen and (max-width: 1024px) 
+{
+  .WeatherApp 
+  {
+    font-size: 18px;
+  }
+
+  .Header
+  {
+    padding: 0.32px;
+  }
+  
+
+  .Main 
+  {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .container 
+  {
+    width: 100vw;
+    /* margin: 30px auto; */
+  }
+}
+
+/*.WeatherApp:before 
 {
   content: '';
-  /* background: url('./assets/sunset.jpg') no-repeat center center/cover; */
+   background: url('./assets/sunset.jpg') no-repeat center center/cover; 
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
   z-index: -1;
-}
+}*/
 
 .WeatherApp#dark
 {
@@ -117,10 +193,11 @@ h1 {
   flex-direction: column;
 
   justify-content: start;
+  
   width: 94%;
   height: 88%;
   /* margin: 1rem 0rem 16px 2rem; */
-  padding: 4px 2%;
+  padding: 2px 2%;
   border-radius: 5px;
   border: solid 1px whitesmoke;
   background: #16161650;
@@ -184,7 +261,7 @@ h1 {
   width: 100%;
   height: 100vh;
   display: flex;
-  padding: 10px;
+  padding: 5px
 }
 
 .cloud
@@ -245,9 +322,9 @@ h1 {
 }
 #cover-dir .wind-dir
 {
-  position: absolute;
-  top: 50px;
-  right: 64px;
+  position: relative;
+  top: -64px;
+  right: 0px;
   font-size: 32px;
 }
 
@@ -258,21 +335,22 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: start;
-    justify-content: start;
+    justify-content: end;
     padding-top: 8px;
     
     flex: 1;
     /* width: 500px; */
-    height: 100%;
+    height: 86%;
     /* background: #6969690c; */
-    border-bottom: 1px whitesmoke solid; 
+    /* border-bottom: 1px whitesmoke solid;  */
     gap: 10px;
 }
+
 
 .r-aside
 {      
   width: 400px;
-  height: 100%;
+  height: 99%;
   /* background: #f3f3f360; */
   background: #6969690c;
   /* border: 1px whitesmoke solid;  */

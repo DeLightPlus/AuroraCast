@@ -1,39 +1,88 @@
+import { useState } from "react";
 import weatherIcons from "./constants.js";
 import Forecast from "./Forecast.jsx";
-const TempNother = ({ handleSearchSubmit, searchLocation, location, setLocation, weatherData, daily }) =>
+const TempNother = ({ 
+    useCurrentLocation,
+    handleSearchSubmit, 
+    weatherData, daily }) =>
 {
-    { console.log('weatherData', weatherData) }    
+    // { console.log('weatherData', weatherData) }    
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedLocation, setSelectedLocation] = useState('');
+    const [searchQuery, setSearchQuery] = useState("")
+
+    const locations = ['Polokwane', 'Cape Town', 'Johannesburg']; // Add more locations as needed
+
+    const toggleDropdown = () => {
+        setIsOpen(!isOpen);
+    };
+
+    const handleSelect = (loc) => 
+    {
+        console.log(loc);
+        
+        setSelectedLocation(loc);
+        setIsOpen(false);
+        handleSearch(loc);        
+    };
+
+    const handleSearch = (loc) =>
+    {
+        console.log('handleSearch', loc);
+        setSearchQuery(loc);
+        handleSearchSubmit(loc);
+
+    }
     
     return(
-        <div className="r-aside">
-            {/* <div className="location">
-                    <p>{ weatherData.name }</p>
-
-                    <div className='bm-save-btn'>
-                            {weatherData.weather && <button > <div className='icn'>&#128278;</div> </button>}
-                    </div>
-            </div> */}
+        <div className="r-aside">         
 
             <div className="TempNotherDetails">                
 
                 <div className="search">  
-                    <div className="btn-h-group">
+                    <div className="loc-pin-container">
                         <button className='bm-loc-btn' 
-                                onClick={handleSearchSubmit}
+                                onClick={() => { useCurrentLocation() } }
                         ><div className="icn">&#128205;</div>
-                        </button>{/* &#128506; */}
-                    </div>              
-                    <input type="text" placeholder='Enter Location' value={ location }
-                        onChange={ event => setLocation(event.target.value) }
-                        onKeyDown={ searchLocation } 
-                    />                                            
-                    <div className="btn-h-group"> 
-                        <button className='bm-search-btn' 
-                            onClick={handleSearchSubmit}
-                        ><div className="icn">&#128269;</div>
                         </button>
+                        {/* &#128506; */}
+                    </div> 
+
+
+                    <input type="text" placeholder='Enter Location' value={ searchQuery }
+                        onChange={ (event) => setSearchQuery(event.target.value) }
+                        onKeyDown={ (event) => {
+                            if (event.key === 'Enter') 
+                            {
+                                console.log(event.target.value);
+                                handleSearch(event.target.value);                                
+                            }
+                        } } 
+                    />      
+
+
+                    <div className="loc-select-container">
+                        <div className="custom-dropdown" onClick={toggleDropdown}>
+                            <div className="selected">
+                                {/* {selectedLocation || "Select Location"} */}
+                                <span className="dropdown-arrow">&#9662;</span> {/* Dropdown arrow */}
+                            </div>
+                            {isOpen && (
+                                <div className="dropdown-list">
+                                    {locations.map((location, index) => (
+                                        <div 
+                                            key={index} 
+                                            className="dropdown-item" 
+                                            onClick={() => handleSelect(location)}
+                                        >
+                                            {location}
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
                     </div>
-                </div>
+                </div>              
 
                 <div className="tempNclouds">            
                     <div style={{display:"flex", flexDirection:"column", justifyContent:"center"}}>                          
@@ -42,19 +91,20 @@ const TempNother = ({ handleSearchSubmit, searchLocation, location, setLocation,
                             { weatherData.main ? <h1> { weatherData.main.temp.toFixed() }°C </h1> : null }
                         </div>                                
 
-                        <div className="feels">
-                            
+                        <div className="feels">                            
                             { weatherData.main ? <>Feels Like: <strong className='bold'>{ weatherData.main.feels_like.toFixed() }°C</strong></> : null }
                         </div>                 
                     </div>          
 
                     <div className="cloud"> 
-                        
+                        <span style={{
+                            marginInline : "4px",
+                        }}/>
                         { weatherData.weather ? <p> { weatherData.weather[0].main }</p> : null }    
                         <div>
                             
                             <div className="description">
-                                
+                            
                                 { weatherData.weather ?<div className='coverImg'> { weatherIcons[weatherData.weather[0].icon] } </div>  : null }                         
                                 { 
                                     weatherData.weather ? 

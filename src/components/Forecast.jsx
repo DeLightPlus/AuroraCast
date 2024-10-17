@@ -13,7 +13,7 @@ import { getCurrentDate } from './index.js';
 
 const Forecast = ({ type, title, data }) => //
 {
-    console.log(type, data);
+    // console.log(type, data);
     const currentDate = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
 
     // const forecastDate = new Date(forecast.dt_txt);
@@ -22,8 +22,7 @@ const Forecast = ({ type, title, data }) => //
     //     console.log('fc', data.length )
 
     return(
-        <div className="Forecasts">
-            
+        <div className={`Forecasts ${type}`}>           
            
             <ul>   <strong>{title} </strong> 
 
@@ -33,9 +32,7 @@ const Forecast = ({ type, title, data }) => //
                     {
                         data.map((h) => (                    
                         
-                        <div key={h.dt} className="box" id='hourlyFC'>
-
-                            { console.log('loading..', h.clouds.all )}
+                        <div key={h.dt} className="box" id='hourlyFC'>                            
                             <div className="cloud">                                
                                     <div style={{ fontSize: '12px' }}>&#9925;</div>
                                     <strong style={{ fontSize: '10px' }}>{h.weather[0].main}</strong>  
@@ -90,7 +87,7 @@ const Forecast = ({ type, title, data }) => //
                             </div>                            
 
                             <div style={{ fontSize: '12px' }}>
-                                { console.log(new Date(day.dt_txt).toLocaleDateString('en-US', { day: 'numeric', month: 'short' }), ' | ', currentDate )                             }
+                                {/* { console.log(new Date(day.dt_txt).toLocaleDateString('en-US', { day: 'numeric', month: 'short' }), ' | ', currentDate )                             } */}
                                 { 
                                     new Date(day.dt_txt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) === currentDate ? 
                                     ( <strong> Today </strong>) : 

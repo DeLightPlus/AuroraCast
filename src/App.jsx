@@ -1,190 +1,135 @@
 import './App.css';
-
-
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Header from './components/Header';
 import Container from './components/Container';
-import TempNother from './components/TemperatureNother.jsx';
 import GetLocation from './components/index.js';
 import { measure_units } from './components/constants.js';
 
-const api = 
-{
+const api = {
   key: "895284fb2d2c50a520ea537456963d9c",
   base: "https://api.openweathermap.org/data/2.5"
-}
+};
 
-
-
-const WeatherApp = () => 
-{
+const WeatherApp = () => {
   const [isDark, setTheme] = useState(true);
   const [isAutoSearching, setAutoSearch] = useState(true);
   const [useLocalStorage, setUseLocalStorage] = useState(true);
-
-
-  const [tempUnits, setTempUnits] = useState(measure_units.metric); //include standard || imperial || metric
-  
-
+  const [tempUnits, setTempUnits] = useState(measure_units.metric);
   const [weatherData, setWeatherData] = useState({});
-  
-  const [searchQuery, setSearchQuery] = useState('');
-  const [forecastData, setForecastData] = useState([]); 
-  
-  const [curLocation, setCurLocation] = useState('');
-  const [location, setLocation] = useState('');
+
+  const [forecastData, setForecastData] = useState([]);
+
 
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);  
- 
-  useEffect(() => { 
-    
-    if(location === '' && useLocalStorage)
-    {
-        const curLocationData = JSON.parse(localStorage.getItem('curLocationWeather'));  
-        if (curLocationData) 
-        {   
-          // console.log('m_data', curLocationData.name);
-          const city = curLocationData;         
-          const cityId = city.id;     
-          // console.log('fc:id=', cityId);
+  const [error, setError] = useState(null);
 
-          setCurLocation(city);
-          setWeatherData(curLocationData);
-          LoadForecastData(cityId);  
-          
-          //console.log('local-forecasts', curLocationForecasts);
-        } 
-    }
-
-    // handleSearchSubmit(); 
-  
-  }, [] ) 
-  
-  const searchLocation = async (event) => 
-  {
-    if (event.key === 'Enter') 
-    {
-      handleSearchSubmit();
-    }
-  }
-
-  const saveCurrentLocation = () =>
-  {
-
-  }
-
-  const handleSearchSubmit = async () =>
-  {
-    try
-    {
-      // setLoading(true);
-      // console.log('location=empty ', location==='');
-
-      if(location !== '')
-      { 
-          setAutoSearch(false);          
-
-          const url = `${api.base}/weather?q=${location}&units=${tempUnits}&appid=${api.key}`;
-          axios.get(url).then((response) => 
-          {
-            // console.log('search cityId:', response.data.id);
-            setWeatherData(response.data);
-            LoadForecastData(response.data.id); 
-
-          });
-  
-          setLocation('');           
+  useEffect(() => {
+    const loadLocalWeatherData = () => {
+      const curLocationData = JSON.parse(localStorage.getItem('curLocationWeather'));
+      if (curLocationData) 
+      {
+        setWeatherData(curLocationData);
+        // console.log(curLocationData.name);        
+        LoadForecastData(curLocationData.name);
       }
-      else
-      {   
-        setAutoSearch(true);
-        // console.log(tempUnits);        
-        GetLocation(tempUnits);             
-        
-        // const curLocationData = JSON.parse(localStorage.getItem('curLocationWeather'));  
-        // if (curLocationData) 
-        // {   
-        //   console.log('m_data', curLocationData.name);
-        //   const city = curLocationData;         
-        //   const cityId = city.id;        
+    };
 
-        //   console.log('fc', cityId);
-
-        //   setCurLocation(city);
-        //   setWeatherData(curLocationData);
-
-        //   LoadForecastData(cityId);  
-          
-        //   //console.log('local-forecasts', curLocationForecasts);
-        // }  
-
-      } 
+    if (useLocalStorage) 
+    {
+      loadLocalWeatherData();
     }
-    catch(err)
+  }, [useLocalStorage]);
+
+  const useCurrentLocation = () =>
+  {
+      console.log('use currentLocation');
+      handleSearchSubmit();
+
+  } 
+
+  const handleSearchSubmit = async (loc) => 
+  {    
+    try 
+    {
+      if (loc) 
+      {
+        console.log('loc:',loc);
+        const weatherResponse = await axios.get(`${api.base}/weather?q=${loc}&units=${tempUnits}&appid=${api.key}`);
+        
+        setWeatherData(weatherResponse.data);
+        LoadForecastData(loc);
+      } 
+      else 
+      {
+        console.log('location!!: ',loc);
+        await GetLocation(tempUnits);
+        
+        // const weatherResponse = await axios.get(`${api.base}/weather?q=${location}&units=${tempUnits}&appid=${api.key}`);
+        // setWeatherData(weatherResponse.data);
+        // LoadForecastData(weatherResponse.data.id);
+      }
+              
+      
+      
+    }
+    catch (err)
     {
       setError('Failed to fetch weather data');
       console.error('Error:', err);
+    } finally {    setLoading(false);   }
+  };
+
+  const LoadForecastData = async (loc) => {
+    console.log(loc);
+    
+    try {
+      const forecastResponse = await axios.get(`${api.base}/forecast?q=${loc}&appid=${api.key}&units=${tempUnits}`);
+      const forecasts = forecastResponse.data.list;
+
+      if (isAutoSearching) 
+      {
+        localStorage.setItem('curLocationForecasts', JSON.stringify(forecasts));
+      }
+
+      setForecastData(forecasts);
+
+    } catch (error) {
+      console.error("Error fetching weather forecast data:", error);
     }
-    finally 
-    {
-      setLoading(false);
-    }
-  
-  }
-  
-  async function LoadForecastData(cityId)
-  {
-    const url = ` ${api.base}/forecast?id=${cityId}&appid=${api.key}&units=${tempUnits} `;
+  };
 
-    await axios.get(url)
-          .then(
-              response => 
-                  {
-                      const data = response.data;
-                      const forecasts = data.list;               
-                      
-                      if(isAutoSearching)
-                        localStorage.setItem('curLocationForecasts', JSON.stringify(forecasts));  
-                      //console.log('forecasts', forecasts);
-
-                      setForecastData(forecasts);                   
-                     
-                  })
-          .catch(error => {  console.error("Error fetching weather forecast data:", error);  });
-  }  
-
-  // console.log('autoSearch', isAutoSearching);  
-  // console.log('loading...', loading);
-
-  return  (
-
-    <div className='WeatherApp' id={ isDark ? "light" : "dark" }>
-      {console.log('weather-data:', weatherData)}
+  return (
+    <div className='WeatherApp' id={isDark ? "light" : "dark"}>
       <Header 
-        isDark={isDark} setTheme={setTheme}
-        tempUnits={tempUnits} setTempUnits={setTempUnits}
-      /> 
-
+        isDark={isDark} 
+        setTheme={setTheme}
+        tempUnits={tempUnits} 
+        setTempUnits={setTempUnits}
+        weatherData={weatherData}
+      />
       <div className="Main">
-        <div className="container">              
-          { console.log('useLS:', useLocalStorage) }
-          { 
-            (weatherData && forecastData) && 
-            <Container                 
-                handleSearchSubmit={handleSearchSubmit}
-                searchLocation={searchLocation}
-                location={location}  setLocation={setLocation}
-                weatherData={weatherData} 
-                forecastData={forecastData}
-            /> 
+      <div className="location">
+                    <p>{ weatherData.name }</p>
+
+                    <div className='bm-save-btn'>
+                            {weatherData.weather && <button > <div className='icn'>&#128278;</div> </button>}
+                    </div>
+                </div>
+        <div className="container">
+
+          {(weatherData && forecastData) && 
+            <Container    
+              useCurrentLocation={useCurrentLocation} 
+              handleSearchSubmit={handleSearchSubmit}              
+              weatherData={weatherData} 
+              forecastData={forecastData}
+            />
           }
         </div>
-        </div>
-
+      </div>
     </div>
   );
-}
+};
 
 export default WeatherApp;

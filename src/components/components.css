@@ -2,8 +2,11 @@
 {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   text-align: start;
-  padding: 1rem;
+  padding: 0.86rem;
+  background: #f0ffff17;
+  border-top-right-radius: 30px;
 }
 
 .Header .logo-dt
@@ -39,7 +42,7 @@
 
 .WeatherApp input 
 {
-   
+  margin-top: 10px;
   padding: .7rem 1.5rem;
   width: 50svw;
   max-width: 100%;
@@ -47,6 +50,7 @@
   font-size: 1.2rem;
   text-align: center;
   border:none;
+  border-radius: 4px;
   /* border-top-left-radius: 10px; */
   /* border-top-right-radius: 10px; */
   /*border-top: 1px solid rgba(255,255,255, 0.8);*/
@@ -61,7 +65,6 @@ input:focus
 {
     outline: none;  
     border-bottom: 2px solid cornflowerblue;  
-    border-top-left-radius: 25px;
 }
 
 
@@ -80,24 +83,91 @@ input:focus
     height: 38px;
 }
 
-.search .btn-h-group
+.search .loc-pin-container
 {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    transform: translate(-20%, -12px);
+    position: relative;    
+    transform: translate(126%, 8px);
 
     display: flex;
     justify-self: start;
     gap: 4px;
 }
 
+.loc-pin-container button
+{
+    background-color: transparent;
+    border-radius: 0px;
+    font-size: 21px;
+}
+
+
+.loc-select-container 
+{
+    position: absolute;
+    right: 32px;
+    width: 2%; /* Set the width as needed */
+    background: transparent;
+}
+
+.custom-dropdown 
+{
+    /* border: 1px solid #ccc; */
+    padding: 1px;
+    cursor: pointer;
+    /* background-color: white; */
+    border-radius: 4px;
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
+    display: flex;
+    justify-content: space-between; /* Align items in a row */
+    align-items: center; /* Center items vertically */
+}
+
+.selected 
+{
+    font-weight: bold;
+    flex-grow: 1; /* Allow the selected text to take available space */
+}
+
+.dropdown-arrow 
+{
+    position: relative;
+    margin-right: 4px; /* Space between text and arrow */
+    font-size: 32px; /* Adjust arrow size as needed */
+    float: right;
+}
+
+.dropdown-list 
+{
+    position: absolute;
+    top: 100%;
+    right: 1%;
+    width: 200px;
+    border: 1px solid #ccc;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 10;    
+}
+
+.dropdown-item 
+{
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    text-align: left;
+    border-bottom: #cccccc70 solid 1px;
+}
+
+.dropdown-item:hover {
+    background-color: #f0f0f0;
+}
+
 
 .btn-h-group
 {
     position: absolute;
-    right: 10px;
-    top: 10px;
+    right: 16px;
+    top: 16px;
     transform: translate(-1px, 0px);
 
     display: flex;
@@ -177,19 +247,6 @@ input:focus
 }
 
 
-.container 
-{
-  position: relative;
-  display: flex;
-  flex-direction: row;
-
-  width: 100%;
-  height: 100%;
-  gap: 16px;
-
-
-}
-
 .location
 {
     display: flex;
@@ -241,6 +298,13 @@ input:focus
 .Forecasts
 {
     width: 100%; 
+}
+
+.Forecasts.hourly
+{
+    width: 100%;
+    display: flex;
+    justify-content: end; 
 }
 
 .Forecasts strong

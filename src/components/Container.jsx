@@ -4,9 +4,13 @@ import './components.css'
 import Forecast from './Forecast.jsx';
 import TempNother from './TemperatureNother.jsx';
 
-const Container = ({ handleSearchSubmit, searchLocation, location, setLocation, weatherData, forecastData }) =>
+const Container = ({ 
+    useCurrentLocation,
+    handleSearchSubmit,      
+    weatherData,
+    forecastData }) =>
 {     
-    console.log('weather Forecast Data', forecastData);
+    // console.log('weather Forecast Data', forecastData);
 
     const [hourly, setHourly] = useState([]);
     const [daily, setDaily] = useState([]);
@@ -69,11 +73,8 @@ const Container = ({ handleSearchSubmit, searchLocation, location, setLocation, 
                 
             { weatherData && 
                 <TempNother 
+                    useCurrentLocation={useCurrentLocation}
                     handleSearchSubmit={handleSearchSubmit}
-                    searchLocation={searchLocation}
-                    location={location}  
-
-                    setLocation={setLocation} 
                     weatherData={weatherData} 
                     daily={daily}
                 /> 
