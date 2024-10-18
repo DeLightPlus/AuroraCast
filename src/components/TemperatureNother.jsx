@@ -35,7 +35,7 @@ const TempNother = ({
     }
     
     return(
-        <div className="r-aside">         
+        <div className="grid-item" id="r-aside">         
 
             <div className="TempNotherDetails">                
 

@@ -67,7 +67,7 @@ const Container = ({
      
      </>):(
         <>   
-            <div className='l-aside'>
+            <div className="grid-item" id='l-aside'>
                 { hourly.length > 0 && <Forecast type='hourly' title='Next 3 HOURS FORECAST' data={ hourly }/> }
             </div> 
                 

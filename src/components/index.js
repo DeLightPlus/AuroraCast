@@ -51,7 +51,7 @@ export default async function GetLocation(units)
                 const latitude = position.coords.latitude;
                 const longitude = position.coords.longitude;
     
-                 return GetSetCurrent(latitude, longitude, units);                                              
+                return GetSetCurrent(latitude, longitude, units);                                              
             }, 
 
                 error => {console.error('Error getting location:', error); }

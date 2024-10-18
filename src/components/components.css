@@ -252,7 +252,7 @@ input:focus
     display: flex;
     justify-content: space-between;
 
-    margin: 2em 5% 0px 4.5%;
+    /* margin: 2em 5% 0px 4.5%; */
     padding:  0px 0px 0px 16px;
     background:linear-gradient(to right, #f3f0f033, #f3f0f01f, transparent);
 }
