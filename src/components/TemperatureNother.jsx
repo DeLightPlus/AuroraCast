@@ -215,7 +215,7 @@ const TempNother = ({
                         </div>
                     </div> 
                 }
-                <br/>
+                {/* <br/> */}
 
                 <div className="daily">
                     { daily.length > 0 && <Forecast type='daily' title='Next 4 DAYS FORECAST' data={ daily } /> }                

@@ -26,9 +26,7 @@
 
 .WeatherApp .search 
 {    
-  /* position: relative; */
-
-
+  position: relative;
   /* width: 100%; */
   display: flex;  
   text-align: center;
@@ -46,11 +44,11 @@
   padding: .7rem 1.5rem;
   width: 50svw;
   max-width: 100%;
-  height: 40px;
+  height: 36px;
   font-size: 1.2rem;
   text-align: center;
   border:none;
-  border-radius: 4px;
+  border-radius: 0px;
   /* border-top-left-radius: 10px; */
   /* border-top-right-radius: 10px; */
   /*border-top: 1px solid rgba(255,255,255, 0.8);*/
@@ -251,10 +249,15 @@ input:focus
 {
     display: flex;
     justify-content: space-between;
-
-    /* margin: 2em 5% 0px 4.5%; */
+    width: 94%;
+    margin: 0em 2% 0.25em 0.5%;
     padding:  0px 0px 0px 16px;
     background:linear-gradient(to right, #f3f0f033, #f3f0f01f, transparent);
+    border-radius: 2px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 16px;
+
+    box-shadow: seashell -4px 4px 8px -4px;
 }
 
 .location p
@@ -304,7 +307,9 @@ input:focus
 {
     width: 100%;
     display: flex;
-    justify-content: end; 
+    flex-direction: column;
+    /* justify-content: center;  */
+    align-items: center;
 }
 
 .Forecasts strong
@@ -317,21 +322,23 @@ input:focus
 {
     margin-top: 0.5rem;
     padding: 4px;
-
     display: flex;
-    align-items: start;    
-
-    width: 98%;
-    height: 128px;
-
-    border-top: solid 1px whitesmoke;
-    /* background: #f8f8f827;    */    
-    /* overflow-x: scroll;
-    scroll-behavior: smooth; */
+    align-items: start;
+    width: 99%;
+    height: 160px;
+    /* border-top: solid 1px whitesmoke; */
     display: hidden;
-
     gap: 10px;
+
+    /* background: #f8f8f827;    */    
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    
 }
+
+.h-scroll::-webkit-scrollbar {
+    display: none; /* Hide the scrollbar */
+  }
 
 .v-scroll
 {

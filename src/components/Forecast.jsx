@@ -24,8 +24,7 @@ const Forecast = ({ type, title, data }) => //
     return(
         <div className={`Forecasts ${type}`}>           
            
-            <ul>   <strong>{title} </strong> 
-
+            <strong className='title'>{title} </strong> 
             {   data && type==='hourly' ? 
                 (    
                     <div className='h-scroll'> 
@@ -68,7 +67,7 @@ const Forecast = ({ type, title, data }) => //
                                 </h6>
                             </div>                       
 
-                        </div>                  
+                        </div>                
                             
                         ))
                     }
@@ -106,7 +105,7 @@ const Forecast = ({ type, title, data }) => //
                 ):( <div>No data available</div>)
             } 
                          
-            </ul>
+            
         </div>
     )
 }
