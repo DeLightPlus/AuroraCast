@@ -54,7 +54,7 @@ export default async function GetLocation(units)
                 return GetSetCurrent(latitude, longitude, units);                                              
             }, 
 
-                error => {console.error('Error getting location:', error); }
+                error => { console.error('Error getting location:', error); }
             );
         } 
         else {   console.error("Geolocation is not supported by this browser.");   }   

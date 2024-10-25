@@ -16,30 +16,34 @@ const WeatherApp = () => {
   const [isAutoSearching, setAutoSearch] = useState(true);
   const [useLocalStorage, setUseLocalStorage] = useState(true);
   const [tempUnits, setTempUnits] = useState(measure_units.metric);
-  const [weatherData, setWeatherData] = useState({});
 
+
+
+  const [weatherData, setWeatherData] = useState({});
   const [forecastData, setForecastData] = useState([]);
 
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const loadLocalWeatherData = () => {
-      const curLocationData = JSON.parse(localStorage.getItem('curLocationWeather'));
-      if (curLocationData) 
-      {
-        setWeatherData(curLocationData);
-        // console.log(curLocationData.name);        
-        LoadForecastData(curLocationData.name);
-      }
-    };
+  useEffect(() => {    
 
     if (useLocalStorage) 
     {
       loadLocalWeatherData();
     }
   }, [useLocalStorage]);
+
+
+  const loadLocalWeatherData = () => {
+    const curLocationData = JSON.parse(localStorage.getItem('curLocationWeather'));
+    if (curLocationData) 
+    {
+      setWeatherData(curLocationData);
+      // console.log(curLocationData.name);        
+      LoadForecastData(curLocationData.name);
+    }
+  };
 
   const useCurrentLocation = () =>
   {
@@ -64,14 +68,13 @@ const WeatherApp = () => {
       {
         console.log('location!!: ',loc);
         await GetLocation(tempUnits);
+
+        loadLocalWeatherData();
         
         // const weatherResponse = await axios.get(`${api.base}/weather?q=${location}&units=${tempUnits}&appid=${api.key}`);
         // setWeatherData(weatherResponse.data);
         // LoadForecastData(weatherResponse.data.id);
       }
-              
-      
-      
     }
     catch (err)
     {
