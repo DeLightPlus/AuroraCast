@@ -4,7 +4,8 @@ import Forecast from "./Forecast.jsx";
 const TempNother = ({ 
     useCurrentLocation,
     handleSearchSubmit, 
-    weatherData, daily }) =>
+    weatherData, 
+    daily, alert }) =>
 {
     // { console.log('weatherData', weatherData) }    
     const [isOpen, setIsOpen] = useState(false);
@@ -93,7 +94,9 @@ const TempNother = ({
 
                         <div className="feels">                            
                             { weatherData.main ? <>Feels Like: <strong className='bold'>{ weatherData.main.feels_like.toFixed() }°C</strong></> : null }
-                        </div>                 
+                        </div>
+                        <hr/>
+                        <strong>Very Cold</strong>            
                     </div>          
 
                     <div className="cloud"> 
