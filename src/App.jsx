@@ -5,6 +5,8 @@ import Header from './components/Header';
 import Container from './components/Container';
 import GetLocation from './components/index.js';
 import { measure_units } from './components/constants.js';
+import CookieConsent from './components/CookiesConsent.jsx';
+import TermsOfService from './components/TermsOfService.jsx';
 
 const api = {
   key: "895284fb2d2c50a520ea537456963d9c",
@@ -17,12 +19,11 @@ const WeatherApp = () => {
   const [useLocalStorage, setUseLocalStorage] = useState(true);
   const [tempUnits, setTempUnits] = useState(measure_units.metric);
 
-
-
   const [weatherData, setWeatherData] = useState({});
   const [forecastData, setForecastData] = useState([]);
 
 
+  const [showTermsOfService, setShowTermsOfService] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -110,6 +111,7 @@ const WeatherApp = () => {
         tempUnits={tempUnits} 
         setTempUnits={setTempUnits}
         weatherData={weatherData}
+        setShowTermsOfService={setShowTermsOfService}
       />
       <div className="Main">
         <div className="location">
@@ -132,8 +134,11 @@ const WeatherApp = () => {
             }
         </div>
 
-        ppp
+  
       </div>
+
+      <CookieConsent setShowTermsOfService={setShowTermsOfService}/>
+      { showTermsOfService && <TermsOfService/> }
     </div>
   );
 };

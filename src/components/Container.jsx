@@ -84,31 +84,23 @@ const Container = ({
     // Group alerts by date and select the highest and lowest temperature alerts
     const groupAlertsByDate = (alerts) => {
         const groupedAlerts = {};
-
+    
         alerts.forEach((alert) => {
-        const date = new Date(alert.dt * 1000).toLocaleDateString(); // Get the date in a readable format
-        const description = alert.weather[0].description; // Get the weather description
-        const temp_max = alert.main.temp_max; // Get the maximum temperature
-        const temp_min = alert.main.temp_min; // Get the minimum temperature
-
-        // Initialize or update alerts for each date
-        if (!groupedAlerts[date]) {
-            groupedAlerts[date] = {
-            highest: { time: new Date(alert.dt * 1000).toLocaleTimeString(), description, temp: temp_max, type: 'high' },
-            lowest: { time: new Date(alert.dt * 1000).toLocaleTimeString(), description, temp: temp_min, type: 'low' },
-            };
-        } else {
-            // Update highest temperature alert if needed
-            if (temp_max > groupedAlerts[date].highest.temp) {
-            groupedAlerts[date].highest = { time: new Date(alert.dt * 1000).toLocaleTimeString(), description, temp: temp_max, type: 'high' };
+            const date = new Date(alert.dt * 1000).toLocaleDateString(); // Get the date in a readable format
+            const time = new Date(alert.dt * 1000).toLocaleTimeString(); // Get the time of the alert
+            const description = alert.weather[0].description; // Get the weather description
+    
+            // Initialize or update alerts for each date
+            if (!groupedAlerts[date]) {
+                groupedAlerts[date] = {
+                    alerts: [],
+                };
             }
-            // Update lowest temperature alert if needed
-            if (temp_min < groupedAlerts[date].lowest.temp) {
-            groupedAlerts[date].lowest = { time: new Date(alert.dt * 1000).toLocaleTimeString(), description, temp: temp_min, type: 'low' };
-            }
-        }
+    
+            // Add the current alert to the grouped alerts
+            groupedAlerts[date].alerts.push({ time, description });
         });
-
+    
         return groupedAlerts; // Return the grouped alerts
     };
 
@@ -144,27 +136,24 @@ const Container = ({
             
 
             <div className="grid-item" id='l-aside'>
-            { console.log('Alerts: ', alerts) }
-            {
-                Object.keys(groupedAlerts).length > 0 && ( // Check if there are any grouped alerts
+            {console.log('Alerts: ', alerts)}
+            {Object.keys(groupedAlerts).length > 0 && (
                 <div>
-                <h3>Weather Alerts by Day</h3>
-                {
-                    Object.entries(groupedAlerts).map(([date, alert]) => ( // Iterate over each date's alerts
+                    <h3>Weather Alerts by Day</h3>
+                    {Object.entries(groupedAlerts).map(([date, { alerts }]) => (
                         <div key={date}>
-                            <h4>{date}</h4> {/* Display the date */}
+                            <h4>{date}</h4>
                             <ul>
-                                <li>
-                                    <strong>{alert.time}</strong>: 
-                                    {alert.description}, High: {alert.temp_max}°C
-                                </li>
+                                {alerts.map((alert, index) => (
+                                    <li key={index}>
+                                        <strong>{alert.time}</strong>: {alert.description}
+                                    </li>
+                                ))}
                             </ul>
                         </div>
-                        ))
-                }
+                    ))}
                 </div>
-            )
-            }
+            )}
             { hourly.length > 0 && <Forecast type='hourly' title='Next 3 HOURS FORECAST' data={ hourly }/> }
             </div> 
                 
