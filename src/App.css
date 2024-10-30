@@ -1,3 +1,4 @@
+/* App.css */
 * 
 {
   box-sizing: border-box;
@@ -290,6 +291,11 @@ h1 {
     gap: 10px;
 }
 
+#l-aside weatherAlerts
+{
+
+}
+
 
 #r-aside
 {      
@@ -299,3 +305,5 @@ h1 {
   background: #6969690c;
   /* border: 1px whitesmoke solid;  */
 }
+
+
