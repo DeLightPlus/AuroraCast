@@ -4,7 +4,11 @@ import '../App.css';
 import "./components.css";
 import { measure_units } from './constants.js'
 
-const Header = ({ isDark, setTheme, tempUnits, setTempUnits }) =>
+const Header = ({ 
+    isDark, setTheme, 
+    tempUnits, setTempUnits,
+    showTermsOfService,
+    setShowTermsOfService }) =>
 {
     //9728; &#127761; 
     const curDate = getCurrentDate();
@@ -41,6 +45,7 @@ const Header = ({ isDark, setTheme, tempUnits, setTempUnits }) =>
                         <div className="icn">&#128736;</div>
                     </button> {/*// &#128295;*/ }
                 </div>
+                
             </div>
 
             <div className={`setting-menu ${openSettings ? 'open' : ''}`}>
@@ -56,7 +61,10 @@ const Header = ({ isDark, setTheme, tempUnits, setTempUnits }) =>
                         )) 
                     }
                 </div>
+                <div ><a onClick={()=>{setShowTermsOfService(!showTermsOfService)}}>Terms of service</a></div> 
             </div>
+
+            
                     
         </div>        
     );

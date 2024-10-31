@@ -23,7 +23,7 @@ const WeatherApp = () => {
   const [forecastData, setForecastData] = useState([]);
 
 
-  const [showTermsOfService, setShowTermsOfService] = useState({});
+  const [showTermsOfService, setShowTermsOfService] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -111,6 +111,7 @@ const WeatherApp = () => {
         tempUnits={tempUnits} 
         setTempUnits={setTempUnits}
         weatherData={weatherData}
+        showTermsOfService={showTermsOfService}
         setShowTermsOfService={setShowTermsOfService}
       />
       <div className="Main">
@@ -138,7 +139,7 @@ const WeatherApp = () => {
       </div>
 
       <CookieConsent setShowTermsOfService={setShowTermsOfService}/>
-      { showTermsOfService && <TermsOfService/> }
+      { showTermsOfService && <TermsOfService setShowTermsOfService={setShowTermsOfService}/> }
     </div>
   );
 };

@@ -137,7 +137,35 @@ button:focus-visible {
     gap: 1px;
     background: #f9f9f9c7;
   }
+  #l-aside .weatherAlerts
+  {
+      position: absolute;     
+      width: 92svw;
+      top: 0;
+      left: 2%;
+      text-align: center;
+      z-index: 10px;
+  }
 
+  .weatherAlerts .alerts_group
+  {
+    display: flex;
+    flex-direction: column;
+    height: 120px;
+    background: rgb(245, 193, 126);
+
+    width: 100%;
+    overflow-x: auto;
+
+  }
+
+  .alerts_group .weatherAlert_card
+  {
+    width: 100%;
+    height: 100%;
+    background: #646cff;
+  }
+  
   /* .h-scroll::-webkit-scrollbar 
   {
     display: none; 
@@ -175,6 +203,8 @@ button:focus-visible {
     margin: 0;
     width: 100svw;
   }
+
+  
 }
 
 /* Tablet styles (max-width: 1024px) */

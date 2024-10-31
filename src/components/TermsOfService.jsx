@@ -1,11 +1,11 @@
 import React from 'react';
 import './cookiesNterms.css'
 
-const TermsOfService = () => {
+const TermsOfService = ({setShowTermsOfService}) => {
     return (
         <div className="terms-of-service">
             <h1>Terms of Service</h1>
-            <p>Last updated: [Date]</p>
+            <p>Last updated: [32/10/2024]</p>
             <h2>1. Acceptance of Terms</h2>
             <p>
                 By accessing or using our weather app, you agree to be bound by these Terms of Service and our Privacy Policy. If you do not agree, please do not use our app.
@@ -28,8 +28,10 @@ const TermsOfService = () => {
             </p>
             <h2>6. Contact Us</h2>
             <p>
-                If you have any questions about these Terms, please contact us at [Your Contact Email].
+                If you have any questions about these Terms, please contact us at [matlakalakabelo@gmail.com].
             </p>
+
+            <button onClick={() => { setShowTermsOfService(false) }}>I Understand</button>
         </div>
     );
 };

@@ -182,7 +182,8 @@ const Container = ({
             {console.log('Alerts: ', alerts)}
             {Object.keys(groupedAlerts).length > 0 && (
                 <div className='weatherAlerts'>
-                    <h3>Weather Alerts by Day</h3><hr/><br/>
+                    <h3>Weather Alerts</h3><hr/>
+                    <div className="alerts_group">
                     {
                         formattedIntervals.map((interval, index) => {
                             console.log(interval);
@@ -200,7 +201,7 @@ const Container = ({
                         const description = weatherDescription; // e.g., "light rain"
 
                         return (
-                            <div key={index}>
+                            <div className='weatherAlert_card' key={index}>
                                 <p><strong>{dateAndDay}</strong> | <strong>{timeInterval}</strong></p>
                                 {/* <p><strong>{averageTemperature}</strong></p> */}
                                 <p><strong> {description}</strong></p>
@@ -208,6 +209,7 @@ const Container = ({
                             </div>
                         );
                     })}
+                    </div>
                 </div>
             )}
             { hourly.length > 0 && <Forecast type='hourly' title='Next 3 HOURS FORECAST' data={ hourly }/> }

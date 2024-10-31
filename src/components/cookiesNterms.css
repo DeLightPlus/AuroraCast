@@ -8,8 +8,21 @@
     border-top: 1px solid #ccc;
 }
 
-.terms-of-service {
+.terms-of-service 
+{
+    position: absolute;
+    top: 86px;
+    background: #ccc;
     padding: 20px;
     max-width: 800px;
     margin: 0 auto;
+    overflow-y: auto;
+    height: 85svh;
 }
+
+.terms-of-service button
+{
+    padding: 8px;
+    background: rgb(86, 187, 255);
+}
+

@@ -17,7 +17,7 @@ body
 
 #root 
 {
-  position: absolute;
+  position: fixed;
   top:0;
   /* max-width: 1280px; */
   height: 100svh;
@@ -47,13 +47,13 @@ body
   a:nth-of-type(2) .logo { animation: logo-spin infinite 20s linear; }
 }
 
-p {
+/* p {
   font-size: 1.6rem;
 }
 
 h1 {
   font-size: 6rem;
-}
+} */
 
 .WeatherApp 
 {
@@ -65,7 +65,7 @@ h1 {
   color: #ffffff80;
   border-radius: 5px;
   border-top-right-radius: 29px;
-  
+  overflow-y: auto;
 }
 
 .container 
@@ -291,9 +291,16 @@ h1 {
     gap: 10px;
 }
 
-#l-aside weatherAlerts
+#l-aside .weatherAlerts
 {
-
+    position: relative;
+    background: antiquewhite;
+    width: 90%;
+    top: 0;
+    left: 2%;
+    text-align: center;
+    font-size: 16px;
+    
 }
 
 
