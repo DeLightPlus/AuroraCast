@@ -51,7 +51,13 @@ const TempNother = ({
 
 
                     <input type="text" placeholder='Enter Location' value={ searchQuery }
-                        onChange={ (event) => setSearchQuery(event.target.value) }
+                        onChange={(event) => {
+                            const value = event.target.value;
+                            // Regular expression to allow only letters and spaces
+                            if (/^[A-Za-z\s]*$/.test(value)) {
+                                setSearchQuery(value);
+                            }
+                        }}
                         onKeyDown={ (event) => {
                             if (event.key === 'Enter') 
                             {
