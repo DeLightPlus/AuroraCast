@@ -1,3 +1,4 @@
+/* App.css */
 * 
 {
   box-sizing: border-box;
@@ -5,18 +6,10 @@
   padding: 0;
 }
 
-body 
-{
-  font-family: 'Outfit', 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 
 #root 
 {
-  position: absolute;
+  position: fixed;
   top:0;
   /* max-width: 1280px; */
   height: 100svh;
@@ -27,88 +20,8 @@ body
   background-size: cover;
   margin: 0 auto;
   padding: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: start;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-@keyframes logo-spin 
-{
-  from {  transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@media (prefers-reduced-motion: no-preference) 
-{
-  a:nth-of-type(2) .logo { animation: logo-spin infinite 20s linear; }
-}
-
-p {
-  font-size: 1.6rem;
-}
-
-h1 {
-  font-size: 6rem;
-}
-
-.WeatherApp 
-{
-  width: 99%;
-  height: 99vh;
-  position: absolute;
-  top: 4px;
-  left: 8px;
-  color: #ffffff80;
-  border-radius: 5px;
-  border-top-right-radius: 29px;
-  
-}
-
-.container 
-{
-  position: relative;
-  display: grid;
-  grid-template-columns: 60% 40%;
-  grid-gap: 10px;
-  height: 95%;
-}
-
-.grid-item 
-{
-  background-color: #eeeeee25;
-  padding: 0px;
-}
-
-/*.WeatherApp:before 
-{
-  content: '';
-   background: url('./assets/sunset.jpg') no-repeat center center/cover; 
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: -1;
-}*/
-
-.WeatherApp#dark
-{
-  background-color: rgba(0, 0, 0, 0.45);
-
-}
-
-.WeatherApp#dark input::placeholder
-{
-  color: #e4e4e4;
-}
-
-.WeatherApp#dark input
-{
-  color: #e4e4e4;
-}
 
 .WeatherApp#light
 {
@@ -131,24 +44,7 @@ h1 {
   color: #f8f8f8;
 }
 
-.WeatherApp .TempNotherDetails 
-{
-  display: flex;
-  flex-direction: column;
 
-  justify-content: start;
-  
-  width: 94%;
-  height: 7%;
-  /* margin: 1rem 0rem 16px 2rem; */
-  padding: 2px 2%;
-  border-radius: 5px;
-  border: solid 1px whitesmoke;
-  background: #16161650;
-  box-shadow: #fff 0px 4px 10px;
-  /* border-top-left-radius: 0px;
-  border-top-right-radius: 0px; */
-}
 
 .TempNotherDetails .tempNclouds
 {
@@ -274,28 +170,8 @@ h1 {
 
 
 
-#l-aside
-{
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: end;
-    padding-top: 16px;
-    
-    flex: 1;
-    /* width: 500px; */
-    height: 86%;
-    /* background: #6969690c; */
-    /* border-bottom: 1px whitesmoke solid;  */
-    gap: 10px;
-}
 
 
-#r-aside
-{      
-  max-width: 500px;
-  height: 99%;
-  /* background: #f3f3f360; */
-  background: #6969690c;
-  /* border: 1px whitesmoke solid;  */
-}
+
+
+

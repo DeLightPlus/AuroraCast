@@ -1,0 +1,154 @@
+/* Header Container */
+.Header 
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(173, 173, 173); /* Add variables for theming */
+    color: var(--text-color);
+    padding: 20px;
+    border-bottom: 2px solid var(--border-color);
+    position: relative; /* For positioning the settings menu */
+    z-index: 10;
+   
+  }
+  
+  /* Logo and Date Section */
+  .logo-dt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .logo-dt h2 {
+    font-size: 1.8rem;
+    margin: 0;
+    color: var(--primary-color);
+  }
+  
+  .logo-dt strong {
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+    margin-top: 5px;
+  }
+  
+  /* Settings Section */
+  .settting 
+  {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .btn-h-group {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .btn-h-group button {
+    background-color: var(--btn-bg);
+    color: var(--btn-color);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .btn-h-group button:hover {
+    background-color: var(--btn-hover-bg);
+    transform: scale(1.1);
+  }
+  
+  .icn {
+    font-size: 1.4rem;
+  }
+  
+  /* Settings Menu */
+  .setting-menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    right: 20px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 20;
+  }
+  
+  .setting-menu.open {
+    display: flex;
+  }
+  
+  .setting-menu div {
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  
+  .systems {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .system {
+    padding: 5px 10px;
+    background-color: var(--btn-bg);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .system:hover {
+    background-color: var(--btn-hover-bg);
+  }
+  
+  .system.active {
+    background-color: var(--active-bg-color);
+    color: var(--active-text-color);
+  }
+  
+  /* Link Styling */
+  .setting-menu a {
+    text-decoration: none;
+    color: var(--link-color);
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  
+  .setting-menu a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .Header {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 10px;
+    }
+  
+    .logo-dt {
+      align-items: flex-start;
+    }
+  
+    .btn-h-group {
+      gap: 5px;
+    }
+  
+    .setting-menu {
+      right: 10px;
+    }
+  }
+  

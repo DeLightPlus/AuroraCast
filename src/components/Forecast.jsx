@@ -6,10 +6,8 @@
 
 import './components.css';
 import '../App.css';
-import './index.js';
 import weatherIcons from "./constants.js";
 import { useEffect, useState } from 'react';
-import { getCurrentDate } from './index.js';
 
 const Forecast = ({ type, title, data }) => //
 {

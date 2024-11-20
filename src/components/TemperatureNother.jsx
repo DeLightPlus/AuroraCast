@@ -1,93 +1,17 @@
 import { useState } from "react";
 import weatherIcons from "./constants.js";
-import Forecast from "./Forecast.jsx";
-const TempNother = ({ 
-    useCurrentLocation,
-    handleSearchSubmit, 
-    weatherData, 
-    daily, alert }) =>
+
+const TempNother = ({ weatherData }) =>
 {
-    // { console.log('weatherData', weatherData) }    
-    const [isOpen, setIsOpen] = useState(false);
-    const [selectedLocation, setSelectedLocation] = useState('');
-    const [searchQuery, setSearchQuery] = useState("")
-
-    const locations = ['Polokwane', 'Cape Town', 'Johannesburg']; // Add more locations as needed
-
-    const toggleDropdown = () => {
-        setIsOpen(!isOpen);
-    };
-
-    const handleSelect = (loc) => 
-    {
-        console.log(loc);
-        
-        setSelectedLocation(loc);
-        setIsOpen(false);
-        handleSearch(loc);        
-    };
-
-    const handleSearch = (loc) =>
-    {
-        console.log('handleSearch', loc);
-        setSearchQuery(loc);
-        handleSearchSubmit(loc);
-
-    }
+    // { console.log('weatherData', weatherData) }      
     
     return(
-        <div className="grid-item" id="r-aside">         
+        <div className="grid-item" >         
 
-            <div className="TempNotherDetails">                
-
-                <div className="search">  
-                    <div className="loc-pin-container">
-                        <button className='bm-loc-btn' 
-                                onClick={() => { useCurrentLocation() } }
-                        ><div className="icn">&#128205;</div>
-                        </button>
-                        {/* &#128506; */}
-                    </div> 
-
-
-                    <input type="text" placeholder='Enter Location' value={ searchQuery }
-                        onChange={ (event) => setSearchQuery(event.target.value) }
-                        onKeyDown={ (event) => {
-                            if (event.key === 'Enter') 
-                            {
-                                console.log(event.target.value);
-                                handleSearch(event.target.value);                                
-                            }
-                        } } 
-                    />      
-
-
-                    <div className="loc-select-container">
-                        <div className="custom-dropdown" onClick={toggleDropdown}>
-                            <div className="selected">
-                                {/* {selectedLocation || "Select Location"} */}
-                                <span className="dropdown-arrow">&#9662;</span> {/* Dropdown arrow */}
-                            </div>
-                            {isOpen && (
-                                <div className="dropdown-list">
-                                    {locations.map((location, index) => (
-                                        <div 
-                                            key={index} 
-                                            className="dropdown-item" 
-                                            onClick={() => handleSelect(location)}
-                                        >
-                                            {location}
-                                        </div>
-                                    ))}
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                </div>              
-
+            <div className="TempNotherDetails">
                 <div className="tempNclouds">            
                     <div style={{display:"flex", flexDirection:"column", justifyContent:"center"}}>                          
-
+                        <h1>{weatherData.name}</h1>
                         <div className="temp">
                             { weatherData.main ? <h1> { weatherData.main.temp.toFixed() }°C </h1> : null }
                         </div>                                
@@ -96,7 +20,7 @@ const TempNother = ({
                             { weatherData.main ? <>Feels Like: <strong className='bold'>{ weatherData.main.feels_like.toFixed() }°C</strong></> : null }
                         </div>
                         <hr/>
-                        <strong>Very Cold</strong>            
+                        {/* <strong>Very Cold</strong>             */}
                     </div>          
 
                     <div className="cloud"> 
@@ -217,12 +141,7 @@ const TempNother = ({
 
                         </div>
                     </div> 
-                }
-                {/* <br/> */}
-
-                <div className="daily">
-                    { daily.length > 0 && <Forecast type='daily' title='Next 4 DAYS FORECAST' data={ daily } /> }                
-                </div>
+                }               
                 
             </div>
 
