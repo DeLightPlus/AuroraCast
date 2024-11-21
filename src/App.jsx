@@ -1,4 +1,9 @@
 import './App.css';
+import './components/components.css';
+
+import { FaSearch } from "react-icons/fa";
+
+
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Header from './components/Header/Header.jsx';
@@ -9,8 +14,8 @@ import TermsOfService from './components/TermsOfService.jsx';
 import GetLocation, { LoadForecastData } from './api/api.js';
 import TempNother from './components/TemperatureNother.jsx';
 import WeatherInsights from './api/WeatherInsights.js';
+import Forecast from './components/Forecast.jsx';
 
-// import WeatherInsights from './components/WeatherInsights.jsx';
 
 const api = {
   key: "895284fb2d2c50a520ea537456963d9c",
@@ -46,7 +51,32 @@ const WeatherApp = () => {
     {
       setWeatherData(curLocationData);
       // console.log(curLocationData.name);        
-      LoadForecastData(curLocationData.name);
+      LoadForecastData(curLocationData.name, true);
+    }
+  };
+
+  const LoadForecastData = async (loc, save) => {
+    console.log(loc);
+    
+    try 
+    {
+      const forecastResponse = await axios.get(`${api.base}/forecast?q=${loc}&appid=${api.key}&units=${tempUnits}`);
+      const forecasts = forecastResponse.data.list;
+      console.log(forecasts);;
+
+      if (save) 
+      {
+        localStorage.setItem('curLocationForecasts', JSON.stringify(forecasts));
+      }
+
+      setForecastData(forecasts)
+
+      return forecasts;
+
+    } 
+    catch (error) 
+    {
+      console.error("Error fetching weather forecast data:", error);
     }
   };
 
@@ -57,7 +87,7 @@ const WeatherApp = () => {
 
   } 
 
-  const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
     const [selectedLocation, setSelectedLocation] = useState('');
     const [searchQuery, setSearchQuery] = useState("")
 
@@ -92,18 +122,13 @@ const WeatherApp = () => {
           console.log('loc:',loc);
           const weatherResponse = await axios.get(`${api.base}/weather?q=${loc}&units=${tempUnits}&appid=${api.key}`);
           
-          setWeatherData(weatherResponse.data);
-          let forecasts = await LoadForecastData(loc);
-          console.log(forecasts);
-          
-          setForecastData(forecasts)
+          setWeatherData(weatherResponse.data);              
         } 
         else 
         {
           console.log('location!!: ',loc);
           await GetLocation(tempUnits);
-          loadLocalWeatherData();
-        
+          loadLocalWeatherData();        
         }
       }
       catch (err)
@@ -116,23 +141,15 @@ const WeatherApp = () => {
    
 
   return (
-    // <div className='WeatherApp' id={isDark ? "light" : "dark"}>
-    //   
+    // <div className='WeatherApp' id={isDark ? "light" : "dark"}> 
     //   <div className="Main">
     //     <div className="location">
     //                   <p>{ weatherData.name }</p>
-
     //                   <div className='bm-save-btn'>
     //                           {weatherData.weather && <button > <div className='icn'>&#128278;</div> </button>}
     //                   </div>
     //     </div>
-
-        
-
-  
     //   </div>
-
-    //   
     // </div>
 
     <div className="grid-container">
@@ -146,62 +163,62 @@ const WeatherApp = () => {
         showTermsOfService={showTermsOfService}
         setShowTermsOfService={setShowTermsOfService}
       />
-        {console.log(forecastData)}
+       
       {/* Column 1 */}
       <div className="grid-column-1">
 
         <div className="column1-header"> 
-          <div className="search">  
-            <div className="loc-pin-container">
-              <button className='bm-loc-btn' 
-                onClick={() => { useCurrentLocation() } }
-              >
-                <div className="icn">&#128205;</div>
+
+          <div className="search-container">
+              <div className="loc-pin-container">             
+                📍
+              </div>
+              <input className="search-input"
+                type="text" placeholder='Enter Location' 
+                value={ searchQuery }
+                onChange={(event) => {
+                  const value = event.target.value;                    
+                    if (/^[A-Za-z\s]*$/.test(value)) 
+                    {
+                      setSearchQuery(value);
+                    }
+                  }}
+
+                onKeyDown={ (event) => {
+                    if (event.key === 'Enter') 
+                    {
+                      console.log(event.target.value);
+                      handleSearch(event.target.value);                                
+                    }
+                } } 
+              />
+              <button className='search-icon'>
+                <div className="icn">🔍</div>
               </button>
-            </div> 
-
-
-            <input type="text" placeholder='Enter Location' value={ searchQuery }
-              onChange={(event) => {
-                const value = event.target.value;                    
-                  if (/^[A-Za-z\s]*$/.test(value)) 
-                  {
-                    setSearchQuery(value);
-                  }
-                }}
-
-              onKeyDown={ (event) => {
-                  if (event.key === 'Enter') 
-                  {
-                    console.log(event.target.value);
-                    handleSearch(event.target.value);                                
-                  }
-              } } 
-            />      
-
-
-                    <div className="loc-select-container">
-                        <div className="custom-dropdown" onClick={toggleDropdown}>
-                            <div className="selected">
-                                {/* {selectedLocation || "Select Location"} */}
-                                <span className="dropdown-arrow">&#9662;</span> {/* Dropdown arrow */}
-                            </div>
-                            {isOpen && (
-                                <div className="dropdown-list">
-                                    {locations.map((location, index) => (
-                                        <div 
-                                            key={index} 
-                                            className="dropdown-item" 
-                                            onClick={() => handleSelect(location)}
-                                        >
-                                            {location}
-                                        </div>
-                                    ))}
-                                </div>
-                            )}
-                        </div>
+              <div className="search">             
+           
+                <div className="custom-dropdown" onClick={toggleDropdown}>
+                    <div className="selected">
+                        SetLocation
+                        <span className="dropdown-arrow">&#9662;</span>
                     </div>
+                    {isOpen && (
+                        <div className="dropdown-list">
+                            {locations.map((location, index) => (
+                                <div 
+                                    key={index} 
+                                    className="dropdown-item" 
+                                    onClick={() => handleSelect(location)}
+                                >
+                                    {location}
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+            
           </div> 
+          </div>          
         </div>
 
         <div className="column1-body1">
@@ -215,21 +232,20 @@ const WeatherApp = () => {
         </div>
 
         <div className="column1-body2">  
-          <div className="hourly">
-              {/* { daily.length > 0 && <Forecast type='hourly' title='Next 4 DAYS FORECAST' data={ hourly } /> }                 */}
+          <div className="daily">
+            { forecastData.length > 0 && <Forecast type='daily' title='Next 4 DAYS FORECAST' data={ forecastData } /> }                
           </div>
         </div>
-
-
         <CookieConsent setShowTermsOfService={setShowTermsOfService}/>
         { showTermsOfService && <TermsOfService setShowTermsOfService={setShowTermsOfService}/> }
       </div>
 
       {/* Column 2 (Aside) */}
       <aside className="grid-column-2">
-        <div className="daily">
-          {/* { daily.length > 0 && <Forecast type='daily' title='Next 4 DAYS FORECAST' data={ daily } /> }                 */}
+        <div className="hourly">
+          { forecastData.length > 0 && <Forecast type='hourly' title='Next 4 HOURS FORECAST' data={ forecastData } /> }                
         </div>
+        
       </aside>
 
     </div>

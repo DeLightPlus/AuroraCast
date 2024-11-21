@@ -50,8 +50,7 @@ const Header = ({
 
             <div className={`setting-menu ${openSettings ? 'open' : ''}`}>
                 <div>Set Measure Units:</div>
-                <div className='systems'>
-                    
+                <div className='systems'>                    
                     {
                         Object.values(measure_units).map((sys) =>
                         (
@@ -61,7 +60,7 @@ const Header = ({
                         )) 
                     }
                 </div>
-                <div ><a onClick={()=>{setShowTermsOfService(!showTermsOfService)}}>Terms of service</a></div> 
+                <div><a onClick={()=>{setShowTermsOfService(!showTermsOfService)}}>Terms of service</a></div> 
             </div>
 
             

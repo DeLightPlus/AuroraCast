@@ -10,7 +10,7 @@
   grid-template-columns: 2fr 1fr; /* Column 1 is twice the width of Column 2 */
   grid-template-rows: auto; /* Adjust row height dynamically */
   gap: 10px;
-  padding: 20px;
+  padding: 10px;
 }
 
 .grid-header 
@@ -27,7 +27,7 @@
 .grid-column-1 {
   grid-area: column1;
   display: grid;
-  grid-template-rows: auto 1fr 1fr;
+  grid-template-rows: auto 1fr 0fr;
   gap: 10px;
 }
 
@@ -35,36 +35,146 @@
 {
   display: flex;
   flex-direction: column;
-  background: #2196f3;
+  background: #2195f341;
   color: white;
   padding: 10px;
+  margin-top: 16px;
   text-align: center;
 }
 
-.column1-body1, .column1-body2 
+.column1-body1
 {
-  background: #f1f1f1;
+  background: #ffffff57;
   padding: 10px;
   text-align: center;
+  height: 325px
 }
+.column1-body2 
+{
+  background: linear-gradient(to left,transparent, #f1f1f136, #f1f1f136, #f1f1f136, transparent);
+  padding: 10px;
+  text-align: center;
+  height: max-content
+}
+
+.h-scroll
+{
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  justify-content: center;
+}
+
+.h-scroll .box
+{
+  background: gray;
+  padding:16px;
+  text-align: center;
+  border-radius: 8px;
+  min-width: 86px
+}
+
+
 
 .grid-column-2 
 {
   grid-area: column2;
-  background: #ff5722;
+  background: #ff562200;
   color: white;
   padding: 10px;
   text-align: center;
 }
 
+.v-scroll
+{
+  display: flex;
+  flex-direction: column;
+  width: 100%;  
+  height: 67vh;
+  gap:8px;
+  overflow: scroll;
+  scrollbar-width: none;
+}
+.v-scroll .box
+{
+    padding: 8px;
+    width: 100%;
+    height: max-content;
+    /* flex-wrap: wrap; */
+    gap: 8px;
+    background: #3a3a3ac7;
+    border-bottom: gray solid 1px;
+    border-radius: 8px;
+}
+
+.v-scroll #hourlyFC h6
+{
+  font-size: 14px;
+  text-align: start;
+  text-decoration:underline;
+  margin-bottom: 8px;
+  /* background: rgba(0, 0, 0, 0.205) */
+}
+
+.v-scroll #hourlyFC .hfc-content
+{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+#hourlyFC .hfc-content strong
+{
+  display: flex;
+}
+
+#hourlyFC .hfc-content span
+{
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.hfc-content span small
+{
+  font-size: 10px;
+  margin-right: 4px;
+}
+
+
 /* Responsive Styles */
 @media (max-width: 768px) {
-  .grid-container {
+  .grid-container 
+  {
     grid-template-areas:
       "header"
       "column1"
       "column2";
     grid-template-columns: 1fr; /* Stack columns vertically */
+    height: 100svh;
+    width: 100svw;
+    overflow-y: scroll;
+    padding: 0;
+  }
+
+  .Header
+  {
+    flex-direction: row ;
+    width: 100%;
+  }
+
+  .h-scroll
+  {
+    width: 96vw;
+    justify-content: start;
+    overflow-x: scroll;
+  }
+
+  .terms-of-service
+  {top: 96px;
+    height: 100%;
+    max-width: 100%;
   }
 }
 

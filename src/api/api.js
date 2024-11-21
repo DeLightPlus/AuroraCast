@@ -1,5 +1,4 @@
 import axios from "axios";
-import WeatherInsights from "./WeatherInsights";
 
 const api = 
 {
@@ -90,30 +89,7 @@ export function getCurrentDate()
 
     return cur_date;
 }
-
-export const LoadForecastData = async (loc, save) => {
-    console.log(loc);
-    
-    try 
-    {
-      const forecastResponse = await axios.get(`${api.base}/forecast?q=${loc}&appid=${api.key}&units=${_tempUnits}`);
-      const forecasts = forecastResponse.data.list;
-      console.log(forecasts);;
-
-      if (save) 
-      {
-        localStorage.setItem('curLocationForecasts', JSON.stringify(forecasts));
-      }
-
-      return (forecasts);
-
-    } 
-    catch (error) 
-    {
-      console.error("Error fetching weather forecast data:", error);
-    }
-  };
-  
+ 
 
 
 

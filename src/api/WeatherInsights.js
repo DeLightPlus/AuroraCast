@@ -3,32 +3,7 @@ import { groupAlertsByDate, formatAlertIntervals } from './forecastUtils';
 
 
 export function useWeatherInsights(forecastData) {
-  const [hourly, setHourly] = useState([]);
-  const [daily, setDaily] = useState([]);
   const [alerts, setAlerts] = useState([]);
-
-  // Fetch and update Hourly Forecast
-  const getHourlyForecast = () => {
-    if (forecastData.length > 0) {
-      const hourlyForecast = forecastData
-        .filter((hourly) => hourly.dt >= forecastData[0].dt)
-        .slice(0, 8); // Get next 8 hours
-      setHourly(hourlyForecast);
-    }
-  };
-
-  // Fetch and update Daily Forecast
-  const getDailyForecast = () => {
-    const currentDate = new Date();
-
-    if (forecastData.length > 0) {
-      const dailyForecast = forecastData.filter((forecast) => {
-        const forecastDate = new Date(forecast.dt_txt);
-        return forecastDate.getHours() === 12 && forecastDate >= currentDate;
-      });
-      setDaily(dailyForecast);
-    }
-  };
 
   // Fetch and update Weather Alerts
   const getForecastAlerts = () => {
