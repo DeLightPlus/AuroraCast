@@ -145,7 +145,6 @@ const TempNother = ({ weatherData }) =>
                 </div> 
             }                              
             </div>
-
              
         </div>
     )

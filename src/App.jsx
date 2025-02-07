@@ -235,18 +235,18 @@ const WeatherApp = () => {
           <div className="daily">
             { forecastData.length > 0 && <Forecast type='daily' title='Next 4 DAYS FORECAST' data={ forecastData } /> }                
           </div>
-        </div>
-        <CookieConsent setShowTermsOfService={setShowTermsOfService}/>
-        { showTermsOfService && <TermsOfService setShowTermsOfService={setShowTermsOfService}/> }
+        </div>       
       </div>
 
       {/* Column 2 (Aside) */}
       <aside className="grid-column-2">
         <div className="hourly">
           { forecastData.length > 0 && <Forecast type='hourly' title='Next 4 HOURS FORECAST' data={ forecastData } /> }                
-        </div>
-        
+        </div>        
       </aside>
+
+      <CookieConsent setShowTermsOfService={setShowTermsOfService}/>
+        { showTermsOfService && <TermsOfService setShowTermsOfService={setShowTermsOfService}/> }
 
     </div>
   );
