@@ -11,7 +11,7 @@ import Header from './components/Header/Header.jsx';
 import { measure_units } from './components/constants.js';
 import CookieConsent from './components/CookiesConsent.jsx';
 import TermsOfService from './components/TermsOfService.jsx';
-import GetLocation, { LoadForecastData } from './api/api.js';
+import GetLocation from './api/api.js';
 import TempNother from './components/TemperatureNother.jsx';
 import WeatherInsights from './api/WeatherInsights.js';
 import Forecast from './components/Forecast.jsx';
@@ -82,9 +82,8 @@ const WeatherApp = () => {
 
   const useCurrentLocation = () =>
   {
-      console.log('use currentLocation');
-      handleSearchSubmit();
-
+    console.log('use currentLocation');
+    handleSearchSubmit();
   } 
 
     const [isOpen, setIsOpen] = useState(false);
@@ -195,8 +194,8 @@ const WeatherApp = () => {
               <button className='search-icon'>
                 <div className="icn">🔍</div>
               </button>
-              <div className="search">             
-           
+
+              {/* <div className="search"> 
                 <div className="custom-dropdown" onClick={toggleDropdown}>
                     <div className="selected">
                         SetLocation
@@ -215,9 +214,8 @@ const WeatherApp = () => {
                             ))}
                         </div>
                     )}
-                </div>
-            
-          </div> 
+                </div>            
+              </div>  */}
           </div>          
         </div>
 
