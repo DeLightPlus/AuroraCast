@@ -191,7 +191,9 @@ const WeatherApp = () => {
                     }
                 } } 
               />
+
               <button className='search-icon'>
+                🔍
                 <div className="icn">🔍</div>
               </button>
 
