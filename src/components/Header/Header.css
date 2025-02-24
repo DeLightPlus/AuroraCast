@@ -7,7 +7,7 @@
     justify-content: space-between;
     background-color: rgb(173, 173, 173); /* Add variables for theming */
     color: var(--text-color);
-    padding: 20px;
+    padding: 8px 16px;
     border-bottom: 2px solid var(--border-color);
     position: relative; /* For positioning the settings menu */
     z-index: 10;
@@ -21,14 +21,17 @@
     align-items: center;
   }
   
-  .logo-dt h2 {
+  .logo-dt h2 
+  {
     font-size: 1.8rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     margin: 0;
     color: var(--primary-color);
   }
   
   .logo-dt strong {
-    font-size: 0.9rem;
+    font-size: 0.75rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color: var(--secondary-color);
     margin-top: 5px;
   }
@@ -43,6 +46,8 @@
   
   .btn-h-group {
     display: flex;
+    align-items: center;
+    justify-content: center;
     gap: 10px;
   }
   
@@ -89,10 +94,14 @@
   
   .setting-menu.open {
     display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    background: lightgray;
+    
   }
   
   .setting-menu div {
-    margin-bottom: 10px;
     font-size: 0.9rem;
     cursor: pointer;
   }
@@ -129,6 +138,86 @@
   
   .setting-menu a:hover {
     text-decoration: underline;
+  }
+
+
+  .btn-cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    background-color: gray;
+    margin: 0;
+    border: 1px solid #ffff;
+    border-radius: 50px;
+    transition: background-color 4s ease;
+  }
+
+  .btn-cont-fill
+  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    background-color: black;
+    margin: 0;
+    border: 1px solid #ffff;
+    border-radius: 50px;
+    transition: background-color 2s ease;
+  }
+
+  .setting-btn
+  {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    position: relative;
+    transition: background-color 5s ease;
+  }
+  
+
+
+  .settings-btn {
+    display: block;
+    transition: transform 0.4s ease-in;
+  }
+  .settings-btn:hover {
+    transform: rotate(60deg);
+  }
+  .settings-btn:active {
+    animation: rot 1s linear infinite;
+  }
+
+  
+
+ 
+
+  @keyframes rot {
+    from {
+      transform: rotate(-100deg);
+    }
+    to {
+      transform: rotate(180deg);
+    }
+  }
+
+  .tooltip {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
   }
   
   /* Responsive Design */

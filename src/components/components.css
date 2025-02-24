@@ -1,38 +1,39 @@
 /* General Styles for the SearchBar */
 .search-container {
-    /* width: 340px; */
-    /* height: 48px; */
-    padding: 4px 8px;
-    border-radius: 12px;
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    background: linear-gradient(to top right, #f472b6, #fbbf24); /* Gradient background */
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    /* display: flex;
+    flex-direction: column;
+    gap: 7px;
+    
+    color: white; */
+    /* padding: 4px 8px;
+    border-radius: 12px; */
+
+    /* justify-content: start; */
+    /* align-items: center; */
+    /* background: linear-gradient(to top right, #f472b6, #fbbf24); Gradient background
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); */
   }
   
   .search-input 
   {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 0 8px;
-    border-radius: 10px;
-    font-size: 16px;
-    background-color: transparent;
-    color: #2d3748;
-    border: 2px solid #e2e8f0;
+    width: 150px;
+    padding: 10px 0px 10px 40px;
+    border-radius: 9999px;
+    border: solid 1px #333;
+    transition: all .2s ease-in-out;
     outline: none;
-    position: relative;
-    transition: all 0.3s ease;
+    opacity: 0.8;
   }
   
   .search-input::placeholder {
     color: #4a5568;
   }
   
-  .search-input:focus {
-    border-color: #fbbf24;
-    box-shadow: 0 0 5px rgba(249, 191, 36, 0.7);
+  .search-input:focus 
+  {
+    opacity: 1;
+    width: 250px;
   }
   
   .search-input:focus::placeholder {
@@ -40,20 +41,12 @@
   }
   
   /* Position and style for the search icon */
-  .search-container .search-icon {
-    /* position: absolute; */
-    /* left: 12px; */
-    /* top: 50%; */
-    /* transform: translateY(-50%); */
-    width: 32px;
-    height: 32px;
-    color: #2d3748;
-    pointer-events: none;
-    font-size: 18px; /* You can adjust the size of the icon */
-  }
-  
-  .search-container .search-input:focus + .search-icon {
-    color: #fbbf24;
+  .search-container svg 
+  {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translate(0, -50%);
   }
   
   
