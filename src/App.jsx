@@ -1,11 +1,8 @@
 import './App.css';
 import './components/components.css';
 
-import { FaSearch } from "react-icons/fa";
-
-
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { GlobalSearch } from 'iconsax-react';
 import Header from './components/Header/Header.jsx';
 
 import { measure_units } from './components/constants.js';
@@ -14,12 +11,16 @@ import TermsOfService from './components/TermsOfService.jsx';
 
 import TempNother from './components/TemperatureNother.jsx';
 
-import Forecast from './components/Forecast.jsx';
+import Forecast from './components/Forecast/Forecast.jsx';
 import WeatherCard from './components/WeatherCardMini/WeatherCardMini.jsx';
 
-import useCurrentLocation from './hooks/useCurrentLocation.jsx';
-import useWeather from './hooks/useWeather.jsx';
-import useForecast from './hooks/useForecast.jsx';
+import useCurrentLocation from './hooks/useCurrentLocation';
+import useWeatherAndForecast from './hooks/useWeatherAndForecast';
+
+
+import CloudsSun from './components/Loaders/CloudsSun.jsx';
+import SkeletonLoader from './components/Loaders/SkeletonLoader.jsx';
+import VerticalLineLoader from './components/Loaders/VerticalLineLoader.jsx';
 
 
 const api = {
@@ -31,96 +32,50 @@ const WeatherApp = () => {
   const [isDark, setTheme] = useState(true);
   const [tempUnits, setTempUnits] = useState(measure_units.metric);
 
+  const [searchQuery, setSearchQuery] = useState('');
+  const [customLocation, setCustomLocation] = useState(null);
+  const [savedLocations, setSavedLocations] = useState(() => {
+    const saved = localStorage.getItem('savedLocations');
+    return saved ? JSON.parse(saved) : [];
+  });
+
   const { location, error:locationError } = useCurrentLocation();
-  const { weather: weatherData, loading: weatherLoading, error: weatherError } = useWeather(location?.latitude, location?.longitude, tempUnits);
-  // const { forecast, loading: forecastLoading, error: forecastError } = location.latitude && location.longitude ? useForecast(location.latitude, location.longitude, tempUnits) : { forecast: null, loading: true, error: null };
-  // const [weatherData, setWeatherData] = useState({});
-  // const [forecastData, setForecastData] = useState([]);
+  const { weatherData, forecastData, loading, error } = useWeatherAndForecast(
+    customLocation?.latitude || location?.latitude,
+    customLocation?.longitude || location?.longitude,
+    tempUnits
+  );
 
   const [showTermsOfService, setShowTermsOfService] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);  
-
-  useEffect(() => {    
-
-  
-  }, []);
-
-
-  const LoadForecastData = async (loc, save) => {
-    console.log(loc);
-    
-    try 
-    {
-      const forecastResponse = await axios.get(`${api.base}/forecast?q=${loc}&appid=${api.key}&units=${tempUnits}`);
-      const forecasts = forecastResponse.data.list;
-      console.log(forecasts);;
-
-      if (save) 
-      {
-        localStorage.setItem('curLocationForecasts', JSON.stringify(forecasts));
-      }
-
-      setForecastData(forecasts)
-
-      return forecasts;
-
-    } 
-    catch (error) 
-    {
-      console.error("Error fetching weather forecast data:", error);
-    }
-  };
-
-  const CurrentLocation = () =>
-  {
-    console.log('use currentLocation');
-    handleSearchSubmit();
-  } 
-
-  // const [isOpen, setIsOpen] = useState(false);
-  // const [selectedLocation, setSelectedLocation] = useState('');
-  const [searchQuery, setSearchQuery] = useState("")
 
   const locations = ['Polokwane', 'Cape Town', 'Johannesburg']; // Add more locations as needed
 
-  const handleSearch = (loc) =>
-  {
-      console.log('handleSearch', loc);
-      setSearchQuery(loc);
-      handleSearchSubmit(loc);
-  }
-
-  const handleSearchSubmit = async () => 
-  {    
-    try 
-    {
-      if (loc) 
-      {
-            
-      } 
-      else 
-      {
-          
-      }
+  const handleSearch = () => {
+    if (searchQuery) {
+      fetchLocationByName(searchQuery);
     }
-    catch (err)
-    {
-      setError('Failed to fetch weather data');
-      console.error('Error:', err);
-    } finally {    setLoading(false);   }
   };
 
+  const fetchLocationByName = async (cityName) => {
+    try {
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=${tempUnits}&appid=895284fb2d2c50a520ea537456963d9c`;
+      const response = await fetch(url);
+      const data = await response.json();
+
+      setCustomLocation({ latitude: data.coord.lat, longitude: data.coord.lon });
+      const newSavedLocations = [...savedLocations, { cityName, lat: data.coord.lat, lon: data.coord.lon }];
+      setSavedLocations(newSavedLocations);
+      localStorage.setItem('savedLocations', JSON.stringify(newSavedLocations));
+    } catch (error) {
+      console.error('Failed to fetch location by name:', error);
+    }
+  };
+ 
   if (locationError) { return <div>{locationError}</div>; }
-  
-  if (weatherLoading) { return <div>Loading...</div>; }
-  
-    // if (weatherError || forecastError) {
-    //   return <div>Error fetching data</div>;
-    // }
    
   console.log("currentLocation: ", location);
-  console.log("currentWeather: ", weatherData);
+  console.log("Weather: ", weatherData);
+  console.log("Forecasts: ", forecastData);
 
   return (
     <div className="grid-container">
@@ -159,9 +114,13 @@ const WeatherApp = () => {
                     }
                 } } 
               />            
-              <svg fill="#000000" width="20px" height="20px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+              {/* <svg fill="#000000" width="20px" height="20px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
                   <path d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z" fill-rule="evenodd"></path>
-              </svg>             
+              </svg>              */}
+              <GlobalSearch
+                size="20"
+                color="#697689"
+              />
           </div> 
 
             <WeatherCard />       
@@ -169,27 +128,42 @@ const WeatherApp = () => {
 
         <div className="column1-body1">
         {
-          weatherData && 
-            <TempNother 
-              useCurrentLocation={useCurrentLocation}
-              handleSearchSubmit={handleSearchSubmit}
-              weatherData={weatherData}
-            /> }
+          weatherData ? ( 
+            <TempNother weatherData={weatherData} /> 
+          ):( 
+            <div style={{display:"flex", flexDirection:"row"}}>
+              <CloudsSun /> 
+              <SkeletonLoader />
+            </div>
+          )            
+        }
         </div>
 
+        
         <div className="column1-body2">  
-          <div className="daily">
-            {/* { forecastData.length > 0 && <Forecast type='daily' title='Next 4 DAYS FORECAST' data={ forecastData } /> }                 */}
-          </div>
-        </div>       
+          {
+            loading && ( 
+              <div style={{display:"flex", flexDirection:"row", gap:"32px"}}>
+                <VerticalLineLoader /> 
+                <SkeletonLoader />
+              </div>
+            )    
+          }
+          {forecastData && <Forecast forecastData={forecastData} />}
+        </div> 
+         
+
+             
       </div>
 
-      {/* Column 2 (Aside) */}
-      <aside className="grid-column-2">
-        <div className="hourly">
-          {/* { forecastData.length > 0 && <Forecast type='hourly' title='Next 4 HOURS FORECAST' data={ forecastData } /> }                 */}
-        </div>        
-      </aside>
+      {/* Column 2 (Aside) */     
+      
+        <aside className="grid-column-2">
+              
+        </aside>        
+      }
+      
+      
 
       <CookieConsent setShowTermsOfService={setShowTermsOfService}/>
         { showTermsOfService && <TermsOfService setShowTermsOfService={setShowTermsOfService}/> }

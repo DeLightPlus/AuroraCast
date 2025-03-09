@@ -1,3 +1,4 @@
+//useForecast
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -7,8 +8,12 @@ const api = {
 };
 
 const useForecast = (latitude, longitude, tempUnits = 'metric') => {
-  const [forecast, setForecast] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [forecast, setForecast] = useState(() => {
+    // Check if there's cached forecast data in localStorage
+    const savedData = localStorage.getItem(`forecastData_${latitude}_${longitude}`);
+    return savedData ? JSON.parse(savedData) : null;
+  });
+  const [fcLoading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -21,18 +26,24 @@ const useForecast = (latitude, longitude, tempUnits = 'metric') => {
         
         setForecast(response.data);
         setLoading(false);
-      } catch (error) {
+
+         // Cache the data in localStorage
+         localStorage.setItem(`forecastData_${latitude}_${longitude}`, JSON.stringify(response.data));
+      }
+      catch (error) 
+      {
         setError(error);
         setLoading(false);
       }
     };
 
-    if (latitude && longitude) {
+    if (latitude && longitude) 
+    {
       fetchForecast();
     }
-  }, [latitude, longitude, tempUnits]);
+  }, [ latitude, longitude, tempUnits ]);
 
-  return { forecast, loading, error };
+  return { forecast, fcLoading, error };
 };
 
 export default useForecast;

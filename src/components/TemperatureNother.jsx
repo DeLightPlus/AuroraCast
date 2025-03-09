@@ -13,7 +13,7 @@ const TempNother = ({ weatherData }) => {
                 </div>                
 
                 <div className="tempNclouds">
-                    <div style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                    <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", width:"128px" }}>
                         <div className="cloud">
                             {weatherData.weather ? <p> {weatherData.weather[0].main}</p> : null}
                             <div>

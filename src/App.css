@@ -16,7 +16,9 @@
   height: 100svh;
   width: 100svw;
   background-color: cadetblue;
-  background-image: url('https://cdn.pixabay.com/photo/2015/07/05/10/18/tree-832079_640.jpg');
+  background-image: url('https://img.freepik.com/free-photo/beautiful-photo-sea-sky_58702-11358.jpg?ga=GA1.1.756508765.1734879272&semt=ais_hybrid');
+  /* background-image: url('src/assets/light-weather.jpg'); */
+  /* background-image: url('src/assets/dark-weather.jpg'); */
   background-repeat:no-repeat;
   background-size: cover;
   margin: 0 auto;

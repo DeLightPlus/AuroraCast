@@ -1,0 +1,57 @@
+/* SkeletonLoader.css */
+
+/* Container to align the elements horizontally */
+.skeleton-loader {
+    display: flex;
+    flex-direction: row;
+    gap: 8px; /* Adjust the gap between the avatar and text */
+    align-items: center;
+  }
+  
+  /* Style for the avatar circle */
+  .skeleton-avatar {
+    width: 48px; /* Equivalent to w-12 */
+    height: 48px; /* Equivalent to h-12 */
+    border-radius: 50%; /* Rounded full */
+    background-color: #e0e0e0; /* bg-gray-300 */
+    animation: pulse 1.5s infinite ease-in-out; /* Apply pulse animation */
+  }
+  
+  /* Container for text lines */
+  .skeleton-texts {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Adjust the gap between text lines */
+  }
+  
+  /* Style for the short line */
+  .skeleton-line {
+    height: 20px; /* Equivalent to h-5 */
+    background-color: #e0e0e0; /* bg-gray-300 */
+    border-radius: 9999px; /* Rounded full */
+    animation: pulse 1.5s infinite ease-in-out; /* Apply pulse animation */
+  }
+  
+  /* Short line - w-28 */
+  .skeleton-line-short {
+    width: 112px;
+  }
+  
+  /* Long line - w-36 */
+  .skeleton-line-long {
+    width: 144px;
+  }
+  
+  /* Pulse animation for loading effect */
+  @keyframes pulse {
+    0% {
+      opacity: 0.6;
+    }
+    50% {
+      opacity: 0.3;
+    }
+    100% {
+      opacity: 0.6;
+    }
+  }
+  

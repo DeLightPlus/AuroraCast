@@ -10,7 +10,7 @@
   grid-template-columns: 2fr 1fr; /* Column 1 is twice the width of Column 2 */
   grid-template-rows: auto; /* Adjust row height dynamically */
 
-  padding: 10px;
+  padding: 8px;
 }
 
 .grid-header 
@@ -26,7 +26,7 @@
 .grid-column-1 {
   grid-area: column1;
   display: grid;
-  grid-template-rows: auto 1fr 0fr;
+  grid-template-rows: auto 1fr;
   gap: 2px;
 }
 
@@ -44,9 +44,9 @@
 .column1-body1
 {
   
-  padding: 10px;
+  padding: 16px;
   text-align: center;
-  height: 325px
+
 }
 .column1-body2 
 {
