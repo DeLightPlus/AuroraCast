@@ -13,8 +13,8 @@
   position: fixed;
   top:0;
   /* max-width: 1280px; */
-  height: 100svh;
-  width: 100svw;
+  /* height: 100svh; */
+  /* width: 100svw; */
   background-color: cadetblue;
   background-image: url('https://img.freepik.com/free-photo/beautiful-photo-sea-sky_58702-11358.jpg?ga=GA1.1.756508765.1734879272&semt=ais_hybrid');
   /* background-image: url('src/assets/light-weather.jpg'); */
@@ -67,6 +67,7 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: azure;
   border-radius: 8px;
+  border-bottom-right-radius: 0;
 }
 
 .highligts-container
