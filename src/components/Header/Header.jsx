@@ -60,7 +60,6 @@ const Header = ({
 
             <div className={`setting-menu ${openSettings ? "open" : ""}`}>
                 <TemperatureToggle />
-
                 <div>
                     <a
                         onClick={() => {
