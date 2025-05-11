@@ -14,6 +14,39 @@
   z-index: 10;
 }
 
+@media (max-width: 768px) {
+  .Header {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .logo-dt {
+    width: 100%;
+    text-align: center;
+    align-items: center;
+  }
+
+  .logo-dt h2 {
+    font-size: 1.2rem;
+  }
+
+  .logo-dt strong {
+    font-size: 0.8rem;
+  }
+
+  .settting {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .setting-menu {
+    width: 90%;
+    right: 5%;
+    left: 5%;
+  }
+}
+
 .logo-dt {
   display: flex;
   flex-direction: column;
