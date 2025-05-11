@@ -20,6 +20,14 @@ const Search = ({ onSearch, recentSearches = [] }) => {
     }
   };
 
+  const popularCities = [
+    { name: 'Johannesburg', temp: '23°C', condition: '🌤' },
+    { name: 'Cape Town', temp: '19°C', condition: '⛅' },
+    { name: 'Durban', temp: '25°C', condition: '☀' },
+    { name: 'Pretoria', temp: '22°C', condition: '🌤' },
+    { name: 'Port Elizabeth', temp: '20°C', condition: '⛅' }
+  ];
+
   return (
     <div className="search">
       <div className={`search__container ${isExpanded ? 'search__container--expanded' : ''}`}>
@@ -52,6 +60,18 @@ const Search = ({ onSearch, recentSearches = [] }) => {
         )}
       </div>
       
+      <div className="search__cards">
+        {popularCities.map((city) => (
+          <div key={city.name} className="search__card" onClick={() => handleSearch(city.name)}>
+            <div className="search__card-main">
+              <span className="search__card-condition">{city.condition}</span>
+              <span className="search__card-temp">{city.temp}</span>
+            </div>
+            <div className="search__card-name">{city.name}</div>
+          </div>
+        ))}
+      </div>
+
       {isExpanded && (
         <div className="search__dropdown">
           <div className="search__recent">
@@ -63,18 +83,6 @@ const Search = ({ onSearch, recentSearches = [] }) => {
                 onClick={() => handleSearch(search)}
               >
                 {search}
-              </button>
-            ))}
-          </div>
-          <div className="search__popular">
-            <h3>Popular Cities</h3>
-            {['London', 'New York', 'Tokyo', 'Paris', 'Sydney'].map((city) => (
-              <button
-                key={city}
-                className="search__popular-item"
-                onClick={() => handleSearch(city)}
-              >
-                {city}
               </button>
             ))}
           </div>

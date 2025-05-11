@@ -1,100 +1,146 @@
 
 .search {
-  position: relative;
   width: 100%;
-  max-width: 600px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
 .search__container {
-  display: flex;
-  align-items: center;
-  background: var(--background-color);
-  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
-  border-radius: 12px;
-  padding: 0.5rem 1rem;
-  transition: all 0.3s ease;
-}
-
-.search__container--expanded {
-  border-color: var(--accent-color, #4a90e2);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto 2rem;
 }
 
 .search__icon {
-  margin-right: 0.75rem;
-  opacity: 0.7;
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+  color: var(--text-color);
 }
 
 .search__input {
-  flex: 1;
-  background: transparent;
-  border: none;
+  width: 100%;
+  padding: 1rem 3rem;
+  border-radius: 2rem;
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
   color: var(--text-color);
   font-size: 1rem;
-  outline: none;
-  padding: 0.5rem 0;
+  transition: all 0.3s ease;
 }
 
-.search__input::placeholder {
-  color: var(--text-secondary-color, rgba(255, 255, 255, 0.6));
+.search__input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--accent-color);
 }
 
 .search__clear {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
   background: none;
   border: none;
   color: var(--text-color);
-  cursor: pointer;
   font-size: 1.5rem;
-  opacity: 0.7;
-  padding: 0 0.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
 }
 
-.search__clear:hover {
-  opacity: 1;
+.search__cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.search__card {
+  background: var(--card-bg);
+  border-radius: 1rem;
+  padding: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  border: 1px solid var(--border-color);
+}
+
+.search__card:hover {
+  transform: translateY(-2px);
+}
+
+.search__card-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.search__card-condition {
+  font-size: 2rem;
+}
+
+.search__card-temp {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.search__card-name {
+  font-size: 1rem;
+  color: var(--text-color);
 }
 
 .search__dropdown {
   position: absolute;
-  top: calc(100% + 0.5rem);
+  top: 100%;
   left: 0;
   right: 0;
-  background: var(--background-color);
-  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
-  border-radius: 12px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
   padding: 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  z-index: 100;
+  margin-top: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
 }
 
-.search__recent,
-.search__popular {
-  margin-bottom: 1rem;
-}
-
-.search__recent h3,
-.search__popular h3 {
+.search__recent h3 {
+  margin: 0 0 1rem;
   font-size: 0.9rem;
-  color: var(--text-secondary-color, rgba(255, 255, 255, 0.6));
-  margin-bottom: 0.5rem;
-}
-
-.search__recent-item,
-.search__popular-item {
-  background: none;
-  border: none;
   color: var(--text-color);
-  cursor: pointer;
-  display: block;
-  font-size: 1rem;
-  padding: 0.5rem;
-  text-align: left;
-  width: 100%;
-  transition: background-color 0.2s ease;
+  opacity: 0.8;
 }
 
-.search__recent-item:hover,
-.search__popular-item:hover {
-  background-color: var(--hover-color, rgba(255, 255, 255, 0.1));
-  border-radius: 6px;
+.search__recent-item {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  background: none;
+  color: var(--text-color);
+  text-align: left;
+  cursor: pointer;
+  border-radius: 0.5rem;
+}
+
+.search__recent-item:hover {
+  background: var(--hover-bg);
+}
+
+@media (max-width: 768px) {
+  .search__cards {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+  
+  .search__card {
+    padding: 0.75rem;
+  }
+  
+  .search__card-condition {
+    font-size: 1.5rem;
+  }
+  
+  .search__card-temp {
+    font-size: 1.25rem;
+  }
 }
