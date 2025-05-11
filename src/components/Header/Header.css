@@ -14,6 +14,16 @@
   z-index: 10;
 }
 
+.hamburger-menu {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
 .logo-dt {
   display: flex;
   flex-direction: column;
@@ -36,14 +46,32 @@
 
 @media (max-width: 768px) {
   .Header {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     padding: 1rem;
-    gap: 1.5rem;
+    gap: 1rem;
+  }
+
+  .hamburger-menu {
+    display: block;
   }
 
   .logo-dt {
+    flex: 1;
+    align-items: flex-start;
+  }
+
+  .settting {
+    display: none;
     width: 100%;
+    order: 3;
+  }
+
+  .settting.show-mobile {
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    gap: 1rem;
   }
 
   .logo-dt h2 {

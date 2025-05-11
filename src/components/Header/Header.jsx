@@ -35,7 +35,14 @@ const Header = ({
                 </strong>
             </div>
 
-            <div className="settting">
+            <button 
+                className="hamburger-menu"
+                onClick={() => setOpenSettings(!openSettings)}
+            >
+                ☰
+            </button>
+
+            <div className={`settting ${openSettings ? 'show-mobile' : ''}`}>
                 <div className="btn-h-group">
                     <DarkModeToggle />
 
