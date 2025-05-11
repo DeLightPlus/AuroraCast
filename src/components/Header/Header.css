@@ -14,25 +14,46 @@
   z-index: 10;
 }
 
+.logo-dt {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.settting {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.btn-h-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 @media (max-width: 768px) {
   .Header {
     flex-direction: column;
     padding: 1rem;
-    gap: 1rem;
+    gap: 1.5rem;
   }
 
   .logo-dt {
     width: 100%;
-    text-align: center;
     align-items: center;
   }
 
   .logo-dt h2 {
     font-size: 1.2rem;
+    margin: 0;
   }
 
   .logo-dt strong {
     font-size: 0.8rem;
+    text-align: center;
   }
 
   .settting {
@@ -40,10 +61,15 @@
     justify-content: center;
   }
 
+  .btn-h-group {
+    justify-content: center;
+  }
+
   .setting-menu {
     width: 90%;
     right: 5%;
     left: 5%;
+    top: calc(100% + 0.5rem);
   }
 }
 
