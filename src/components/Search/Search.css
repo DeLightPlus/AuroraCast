@@ -1,4 +1,3 @@
-
 .search {
   position: relative;
   width: 100%;
@@ -79,8 +78,7 @@
   margin-bottom: 0.5rem;
 }
 
-.search__recent-item,
-.search__popular-item {
+.search__recent-item {
   background: none;
   border: none;
   color: var(--text-color);
@@ -93,8 +91,23 @@
   transition: background-color 0.2s ease;
 }
 
-.search__recent-item:hover,
-.search__popular-item:hover {
+.search__recent-item:hover {
   background-color: var(--hover-color, rgba(255, 255, 255, 0.1));
   border-radius: 6px;
+}
+
+.search__cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+.search__cards-grid > div {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.search__cards-grid > div:hover {
+  transform: translateY(-2px);
 }

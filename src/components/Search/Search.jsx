@@ -1,9 +1,11 @@
 
 import { useState, useCallback } from 'react';
 import { GlobalSearch } from 'iconsax-react';
+import WeatherCard from '../WeatherCardMini/WeatherCardMini';
 import './Search.css';
 
 const Search = ({ onSearch, recentSearches = [] }) => {
+  const popularCities = ['London', 'New York', 'Tokyo', 'Paris', 'Sydney'];
   const [searchQuery, setSearchQuery] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -68,15 +70,13 @@ const Search = ({ onSearch, recentSearches = [] }) => {
           </div>
           <div className="search__popular">
             <h3>Popular Cities</h3>
-            {['London', 'New York', 'Tokyo', 'Paris', 'Sydney'].map((city) => (
-              <button
-                key={city}
-                className="search__popular-item"
-                onClick={() => handleSearch(city)}
-              >
-                {city}
-              </button>
-            ))}
+            <div className="search__cards-grid">
+              {popularCities.map((city) => (
+                <div key={city} onClick={() => handleSearch(city)}>
+                  <WeatherCard name={city} />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       )}
