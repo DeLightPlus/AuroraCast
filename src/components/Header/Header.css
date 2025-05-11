@@ -1,244 +1,211 @@
 /* Header Container */
-.Header 
+.Header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  color: var(--text-color);
+  padding: 1rem 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 10;
+}
+
+.logo-dt {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.logo-dt h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 0;
+  color: #fff;
+}
+
+.logo-dt strong {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 400;
+}
+
+.settting {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn-h-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.setting-btn {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  color: #fff;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.setting-btn:hover {
+  opacity: 1;
+}
+
+.setting-menu {
+  position: absolute;
+  top: 100%;
+  right: 2rem;
+  background: rgba(30, 30, 30, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  padding: 1rem;
+  min-width: 200px;
+  display: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.setting-menu.open {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.setting-menu a {
+  color: #fff;
+  text-decoration: none;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.setting-menu a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.systems {
+  display: flex;
+  gap: 10px;
+}
+
+.system {
+  padding: 5px 10px;
+  background-color: var(--btn-bg);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.system:hover {
+  background-color: var(--btn-hover-bg);
+}
+
+.system.active {
+  background-color: var(--active-bg-color);
+  color: var(--active-text-color);
+}
+
+/* Link Styling */
+.setting-menu a {
+  text-decoration: none;
+  color: var(--link-color);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.setting-menu a:hover {
+  text-decoration: underline;
+}
+
+
+.btn-cont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  background-color: gray;
+  margin: 0;
+  border: 1px solid #ffff;
+  border-radius: 50px;
+  transition: background-color 4s ease;
+}
+
+.btn-cont-fill
 {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    width: 100vw;
-    background-color: rgb(173, 173, 173); /* Add variables for theming */
-    color: var(--text-color);
-    padding: 8px 16px;
-    border-bottom: 2px solid var(--border-color);
-    position: relative; /* For positioning the settings menu */
-    z-index: 10;
-   
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  background-color: black;
+  margin: 0;
+  border: 1px solid #ffff;
+  border-radius: 50px;
+  transition: background-color 2s ease;
+}
+
+
+.settings-btn {
+  display: block;
+  transition: transform 0.4s ease-in;
+}
+.settings-btn:hover {
+  transform: rotate(60deg);
+}
+.settings-btn:active {
+  animation: rot 1s linear infinite;
+}
+
+
+@keyframes rot {
+  from {
+    transform: rotate(-100deg);
   }
-  
-  /* Logo and Date Section */
-  .logo-dt {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  to {
+    transform: rotate(180deg);
   }
-  
-  .logo-dt h2 
-  {
-    font-size: 1.8rem;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    margin: 0;
-    color: var(--primary-color);
-  }
-  
-  .logo-dt strong {
-    font-size: 0.75rem;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    color: var(--secondary-color);
-    margin-top: 5px;
-  }
-  
-  /* Settings Section */
-  .settting 
-  {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-  }
-  
-  .btn-h-group {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-  }
-  
-  .btn-h-group button {
-    background-color: var(--btn-bg);
-    color: var(--btn-color);
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 1.2rem;
-    transition: background-color 0.3s, transform 0.3s;
-  }
-  
-  .btn-h-group button:hover {
-    background-color: var(--btn-hover-bg);
-    transform: scale(1.1);
-  }
-  
-  .icn {
-    font-size: 1.4rem;
-  }
-  
-  /* Settings Menu */
-  .setting-menu {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 100%;
-    right: 20px;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 10px;
-    margin-top: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 20;
-  }
-  
-  .setting-menu.open {
-    display: flex;
+}
+
+.tooltip {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .Header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
-    background: lightgray;
-    
-  }
-  
-  .setting-menu div {
-    font-size: 0.9rem;
-    cursor: pointer;
-  }
-  
-  .systems {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .system {
-    padding: 5px 10px;
-    background-color: var(--btn-bg);
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .system:hover {
-    background-color: var(--btn-hover-bg);
-  }
-  
-  .system.active {
-    background-color: var(--active-bg-color);
-    color: var(--active-text-color);
-  }
-  
-  /* Link Styling */
-  .setting-menu a {
-    text-decoration: none;
-    color: var(--link-color);
-    font-size: 0.9rem;
-    cursor: pointer;
-  }
-  
-  .setting-menu a:hover {
-    text-decoration: underline;
-  }
-
-
-  .btn-cont {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: auto;
-    background-color: gray;
-    margin: 0;
-    border: 1px solid #ffff;
-    border-radius: 50px;
-    transition: background-color 4s ease;
-  }
-
-  .btn-cont-fill
-  {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: auto;
-    background-color: black;
-    margin: 0;
-    border: 1px solid #ffff;
-    border-radius: 50px;
-    transition: background-color 2s ease;
-  }
-
-  .setting-btn
-  {
-    background: none;
-    border: none;
-    cursor: pointer;
     padding: 10px;
-    border-radius: 5px;
-    position: relative;
-    transition: background-color 5s ease;
-  }
-  
-
-
-  .settings-btn {
-    display: block;
-    transition: transform 0.4s ease-in;
-  }
-  .settings-btn:hover {
-    transform: rotate(60deg);
-  }
-  .settings-btn:active {
-    animation: rot 1s linear infinite;
   }
 
-  
-
- 
-
-  @keyframes rot {
-    from {
-      transform: rotate(-100deg);
-    }
-    to {
-      transform: rotate(180deg);
-    }
+  .logo-dt {
+    align-items: flex-start;
   }
 
-  .tooltip {
-    visibility: hidden;
-    width: 120px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 5px;
-    padding: 5px;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    margin-left: -60px;
-    opacity: 0;
-    transition: opacity 0.3s;
+  .btn-h-group {
+    gap: 5px;
   }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .Header {
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 10px;
-    }
-  
-    .logo-dt {
-      align-items: flex-start;
-    }
-  
-    .btn-h-group {
-      gap: 5px;
-    }
-  
-    .setting-menu {
-      right: 10px;
-    }
+
+  .setting-menu {
+    right: 10px;
   }
-  
+}
