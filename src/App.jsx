@@ -9,10 +9,10 @@ import { measure_units } from './components/constants.js';
 import CookieConsent from './components/CookiesConsent.jsx';
 import TermsOfService from './components/TermsOfService.jsx';
 
-import TempNother from './components/TemperatureNother.jsx';
+import MainWeatherCard from './components/Cards/MainWeatherCard/MainWeatherCard.jsx';
 
 import Forecast from './components/Forecast/Forecast.jsx';
-import WeatherCard from './components/WeatherCardMini/WeatherCardMini.jsx';
+import WeatherCard from './components/Cards/WeatherCardMini/WeatherCardMini.jsx';
 
 import useCurrentLocation from './hooks/useCurrentLocation';
 import useWeatherAndForecast from './hooks/useWeatherAndForecast';
@@ -81,7 +81,7 @@ const WeatherApp = () => {
   console.log("Forecasts: ", forecastData);
 
   return (
-    <div className="grid-container">
+    <div className="app-container">
       {/* Header */}
       <Header 
         isDark={isDark} 
@@ -92,65 +92,65 @@ const WeatherApp = () => {
         setShowTermsOfService={setShowTermsOfService}
       />
 
-      <div className="grid-content">
-        <div className="sidebar"></div>
+      <div className="app-content">
+        <div className="app-sidebar"></div>
 
-        <div className="grid-main">
-          <div className="column-main-header"> 
-            {/* Updated search implementation */}
+        <div className="app-main">
+          <div className="main-header">
             <Search 
-                onSearch={handleSearch}
-                recentSearches={savedLocations.slice(0, 5)}
-              />
-
-            <WeatherCard name="Polokwane"/>       
-            <WeatherCard name="Johannesburg"/>       
-            <WeatherCard name="Bloemfontein"/>       
-            <WeatherCard name="Durban"/>       
-            <WeatherCard name="Cape Town"/>       
+              onSearch={handleSearch}
+              recentSearches={savedLocations.slice(0, 5)}
+            />
+            <div className="mini-weather-cards">
+              <WeatherCard name="Polokwane" />
+              <WeatherCard name="Johannesburg" />
+              <WeatherCard name="Bloemfontein" />
+              <WeatherCard name="Durban" />
+              <WeatherCard name="Cape Town" />
+            </div>
           </div>
 
-          <div className="column1-body1">
-          {
-            weatherData ? ( 
-              <TempNother weatherData={weatherData} /> 
-            ):( 
-              <div style={{display:"flex", flexDirection:"row"}}>
-                <CloudsSun /> 
+          <div className="main-body-weather">
+            {weatherData ? (
+              <>
+                <MainWeatherCard weatherData={weatherData} />
+
+                <section className="weather-map">
+                  <div className="weather-map-header">
+                    <h2>Weather Map</h2>
+                    <p>{weatherData.name}, {weatherData.sys.country}</p>
+                  </div>
+                  <div className="weather-map-content">
+                    <img src={`https://openweathermap.org/img/wn/${weatherData.weather[0]}`} />
+                  </div>
+                </section>
+              </>              
+            ) : (
+              <div className="loading-wrapper">
+                <CloudsSun />
                 <SkeletonLoader />
               </div>
-            )            
-          }
+            )}
           </div>
 
-          <div className="column1-body2">  
-            {
-              loading && ( 
-                <div style={{display:"flex", flexDirection:"row", gap:"32px"}}>
-                  <VerticalLineLoader /> 
-                  <SkeletonLoader />
-                </div>
-              )    
-            }
+          <div className="main-body-forecast">
+            {loading && (
+              <div className="loading-wrapper">
+                <VerticalLineLoader />
+                <SkeletonLoader />
+              </div>
+            )}
             {forecastData && <Forecast forecastData={forecastData} />}
-          </div>  
+          </div>
         </div>
       </div>
 
-      <footer className="footer">
-        <CookieConsent setShowTermsOfService={setShowTermsOfService}/>
-          { 
-            showTermsOfService && 
-              <TermsOfService 
-                setShowTermsOfService={setShowTermsOfService}
-              /> 
-          }
-
-        </footer>
-
-
-
-
+      <footer className="app-footer">
+        <CookieConsent setShowTermsOfService={setShowTermsOfService} />
+        {showTermsOfService && (
+          <TermsOfService setShowTermsOfService={setShowTermsOfService} />
+        )}
+      </footer>
     </div>
   );
 };

@@ -1,6 +1,5 @@
 /* App.css */
-* 
-{
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -30,211 +29,167 @@
 }
 
 
-.WeatherApp#light
-{
+.WeatherApp#light {
   background-color: rgba(235, 235, 235, 0.45);
   color: black;
 }
 
-.WeatherApp#light input::placeholder
-{
+.WeatherApp#light input::placeholder {
   color: #000000;
 }
 
-.WeatherApp#light input
-{
+.WeatherApp#light input {
   color: #000000;
 }
 
-::placeholder 
-{
+::placeholder {
   color: #f8f8f8;
 }
 
-.TempNotherDetails .title
-{
-  width: 100%;
-  text-align: start;
-  font-size: 11px;
-  color: azure;
-  margin-bottom: 8px;
-  padding-left: 32px;
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-
-
-.TempNotherDetails .tempNclouds
-{
-  width: 100%;
-  padding: 32px 32px 16px 36px;
-  display: flex;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: azure;
-  border-radius: 8px;
-  border-bottom-right-radius: 0;
-}
-
-.highligts-container
-{
-  display: flex;
-  flex-direction: column;  
-  margin-left: 8px;
-  padding: 8px;
-  width: max-content;  
-  background: rgba(215, 228, 228, 0.993);
-  border-radius: 8px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-
-.tempNclouds .cloud-des
-{
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-left: -32px;
-}
-
-.highlights
-{
-  display: flex;
-  flex-direction: row; 
-
-  width: 96%;
-  /* height: 86px; */
-
-  justify-content: flex-start;
-  align-items: center;
-
-  margin: 1px 32px;
-  padding: 0rem 0rem 0rem 0rem;  
-
-  border-radius: 0px;
-  background-color: rgba(255, 255, 255, 0);
-  gap: 16px;
-}
-
-.bold 
-{
-  text-decoration: overline;
-  font-size: 18px;
-  font-weight: 700;
-
-}
-
-.highlights .hl-box
-{
-  /* align-self: flex-end; */
-  padding: 0px 2px; 
-  font-size: 12px;  
-  text-align: start;  
-  /* width: 75px; */
-  /* height: 100%; */
-  /* border: 1px rgb(95, 95, 95) solid;  */
-  border-radius: 5px;
-
-}
-
-.hl-box .h-block
-{
-  display:flex;
-  flex-direction: column;    
-  font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-
-.h-block .h
-{
-  font-size: 14px;
-}
-
-.h-block .body p
-{
-  margin-top: 2px;
-  font-size: 18px;
-  font-weight: 600;
-
-}
-
-.Main
-{
+.Main {
   width: 100%;
   height: 99%;
   /* display: flex; */
   padding: 5px
 }
 
-.cloud
-{
+.cloud {
   display: flex;
 }
 
-.cloud p
-{
-  margin-left: 16px;  
+.cloud p {
+  margin-left: 16px;
   transform: translateX(16px) rotate(269deg);
-  text-decoration: overline;  
+  text-decoration: overline;
 }
 
-.cloud .coverImg
-{
+.cloud .coverImg {
   width: 86px;
   height: 86px;
   font-size: 64px;
-  transform:  translate(-20px, 1px);
+  transform: translate(-20px, 1px);
 
 }
 
-.fc_coverImg
-{  
+.fc_coverImg {
   text-align: center;
   font-size: 32px;
 }
 
-.WeatherApp .description 
-{   
-  margin-top: -10px; 
+.WeatherApp .description {
+  margin-top: -10px;
 
 }
 
-#cover-dir 
-{
+/* Flex container for the entire app */
+.app-container {
   display: flex;
-  height: 32px;
-
-  font-size: 14px;
-  margin-right: 10px;
-  margin-left: -36px;
-
-  gap: 8px; 
-}
-#cover-dir .wind-dir
-{
-  position: relative;
-  top: -84px;
-  right: 0px;
-  font-size: 32px;
-}
-
-
-.feels-like
-{
-  margin-top: 9px;
-}
-
-.feels-like .temp
-{
-  text-align: start;
+  flex-direction: column;
+  height: 100vh;
+  /* Full viewport height */
 
 }
 
-.feels
-{
-  font-size: 12px;
+/* Content area with sidebar and main content */
+.app-content {
+  display: flex;
+  flex: 1;
+  /* Fills the remaining space below the header */
+  overflow: hidden;
+  /* Prevents content overflow */
+  scrollbar-width: 0px;
 }
 
-.feels strong
-{
-  margin-left: 4px;
-  font-size: 11px;
+/* Sidebar styles */
+.app-sidebar {
+  flex: 0 0 50px;
+  /* Fixed width for the sidebar */
+  background: var(--background-color);
+}
+
+/* Main content area */
+.app-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  /* Makes the main content scrollable */
+  padding: 0;
+
+}
+
+/* Sticky header inside the main content */
+.main-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: linear-gradient(135deg, #1e3b72f5 0%, #2a5298f8 100%);
+  padding: 2rem;
+  padding-left: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow: hidden;
+}
+
+
+
+/* Body sections */
+.main-body-weather {
+  display: flex;
+  margin-top: 1rem;
+  padding: 1rem;
+  padding-right: 2rem;
+  background: var(--background-color);
+  border-radius: 12px;
+    /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); */
+}
+
+.main-body-forecast {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background: var(--background-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  width: 75%;
+}
+
+/* Loading container */
+.loading-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+/* Footer styles */
+.app-footer {
+  background: var(--background-color, #1a1a1a);
+  padding: 1rem;
+  text-align: center;
+  border-top: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+}
+
+/* Scrollbar styling for app-main */
+.app-main {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-color, #4a90e2) var(--background-color, #1a1a1a);
+}
+
+.app-main::-webkit-scrollbar {
+  width: 8px;
+}
+
+.app-main::-webkit-scrollbar-thumb {
+  background: var(--accent-color, #4a90e2);
+  border-radius: 4px;
+}
+
+.app-main::-webkit-scrollbar-track {
+  background: var(--background-color, #1a1a1a);
 }

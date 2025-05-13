@@ -1,16 +1,49 @@
+
+/* Mini weather cards container */
+.mini-weather-cards {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  padding: 0.25rem;
+  background: var(--background-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  flex: 1;
+  overflow-x: auto;
+  scrollbar-width: none;
+  scrollbar-color: var(--accent-color, #4a90e2) var(--background-color, #1a1a1a);
+}
+
+/* Scrollbar styling for WebKit browsers */
+.mini-weather-cards::-webkit-scrollbar {
+  height: 8px;
+}
+
+.mini-weather-cards::-webkit-scrollbar-thumb {
+  background: var(--accent-color, #4a90e2);
+  border-radius: 4px;
+}
+
+.mini-weather-cards::-webkit-scrollbar-track {
+  background: var(--background-color, #1a1a1a);
+}
+
+
 .cardm {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     background: var(--background-color);
-    padding: 0.5rem 1rem;
+    padding: 0.35rem 1rem;
     border-radius: 12px;
     border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
     transition: all 0.3s ease;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     width: 100%;
-    max-width: 300px;
+    max-width: 200px;
 }
 
 .cardm:hover {
@@ -32,15 +65,15 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     color: var(--text-color, #fff);
-    font-size: 0.9rem; 
+    font-size: 1.5rem; 
     gap: 0.5rem;   
 }
 
 .cardm .card__details h3 {
     margin: 0;
     /* margin-right: 0.5rem; */
-    font-size: 0.75rem;
-    font-weight: 600;
+    font-size: 0.85rem;
+    font-weight: 200;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -48,8 +81,8 @@
 
 .cardm .card__details p {
     margin: 0;
-    font-size: 1.25rem;
-    color: var(--text-secondary-color, rgba(255, 255, 255, 0.6));
+    font-size: 1rem;
+    color: var(--text-secondary-color, rgba(255, 255, 255, 0.822));
 }
 
 .cardm .card__menu {

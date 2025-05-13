@@ -1,7 +1,7 @@
 
 import { useState, useCallback } from 'react';
 import { GlobalSearch } from 'iconsax-react';
-import WeatherCard from '../WeatherCardMini/WeatherCardMini';
+import WeatherCard from '../Cards/WeatherCardMini/WeatherCardMini';
 import './Search.css';
 
 const Search = ({ onSearch, recentSearches = [] }) => {
