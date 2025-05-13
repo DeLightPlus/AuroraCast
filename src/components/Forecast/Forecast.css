@@ -14,21 +14,29 @@
     border: 1px solid #ddd;
     border-radius: 5px;
     cursor: pointer;
-    background-color: #f7f7f7;
+    background: rgba(5, 12, 44, 0.336);
+    backdrop-filter: blur(10px);
+    color: white;
   }
   
   .tab-button.active {
-    background-color: transparent;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
     color: white;
     border-bottom: none;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+
+    padding: 8px 8px 8px 8px;
+    transform: translateY(4px);
   }
 
   .forecast-content
   {   
     border: 1px solid #ddd;
     padding: 0 8px;
+     background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
   }
   
  /* Horizontal summary card with emojis */

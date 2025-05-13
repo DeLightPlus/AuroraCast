@@ -24,7 +24,7 @@ import Search from './components/Search/Search.jsx';
 import CloudsSun from './components/Loaders/CloudsSun.jsx';
 import SkeletonLoader from './components/Loaders/SkeletonLoader.jsx';
 import VerticalLineLoader from './components/Loaders/VerticalLineLoader.jsx';
-import WeatherMap from './components/WeatherMap/WeatherMap.jsx';
+import WeatherMap from './components/Cards/WeatherMap/WeatherMap.jsx';
 
 
 const api = {
