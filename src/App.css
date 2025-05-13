@@ -193,3 +193,14 @@
 .app-main::-webkit-scrollbar-track {
   background: var(--background-color, #1a1a1a);
 }
+
+/* Weather map styles */
+.weather-map {
+  width: 300px;
+  height: 256px;
+  margin-top: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}

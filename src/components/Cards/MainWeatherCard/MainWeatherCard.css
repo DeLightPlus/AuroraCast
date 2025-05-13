@@ -2,7 +2,7 @@
     flex: 1;
     max-width: 640px;
     max-height: 300px;
- 
+
     display: flex;
     flex-direction: column;
     background-color: var(--color-background);
@@ -13,11 +13,12 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: max-content;
+    height: 270px;
+    /* background-color: aliceblue; */
 }
 
 .temp-N-other-details .title {
-    
+
     width: 100%;
     height: 28px;
     text-align: start;
@@ -28,15 +29,30 @@
     font-family: Segoe Sans, Segoe UI, Segoe WP, Arial, Sans-Serif;
 }
 
-.temp-N-alerts{
+.temp-N-alerts {
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
+.weather-alerts {
+    margin-right: 32px;
+    padding: 16px;   
+    background-color: #001e4131;
+    font-size: small;
+    border-radius: 8px;
+}
+
+.alert {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+}
+
 
 .temp-N-other-details .temp-N-clouds {
-    width: max-content;
+    width: 320px;
+    height: 187px;
     padding: 16px 32px 16px 36px;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
@@ -76,21 +92,21 @@
     font-size: 32px;
 }
 
-.feels-like {    
+.feels-like {
     margin-left: 8px;
     padding: 0 0 16px 16px;
 }
 
 .feels-like .temp {
     display: flex;
-    align-items:center;
+    align-items: center;
     text-align: start;
     font-size: 48px;
     font-weight: 400;
     color: #fff;
 }
 
-.feels-like .temp span{
+.feels-like .temp span {
     font-size: 24px;
     font-weight: 400;
     color: #fff;

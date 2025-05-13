@@ -1,4 +1,5 @@
-
+/* Add this to your main CSS file or index.html */
+@import "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
 
 /*--------------------------------------------------------------------------------------------------*/
 /* General Styles */

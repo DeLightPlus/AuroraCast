@@ -2,8 +2,9 @@ import { useState } from "react";
 import weatherIcons from "../../constants.js";
 
 import './MainWeatherCard.css';
+import WeatherAlerts from "../../WeatherAlerts.jsx";
 
-const MainWeatherCard = ({ weatherData }) => {
+const MainWeatherCard = ({ weatherData, forecastData }) => {
     // { console.log('weatherData', weatherData) }      
 
     return (
@@ -56,17 +57,10 @@ const MainWeatherCard = ({ weatherData }) => {
                         </div>
                     </div>
 
-                    <div className="alerts">
-                        <div className="alert">
-                            {weatherData.weather ?
-                                <div className="alert-icon">
-                                    {weatherIcons[weatherData.weather[0].icon]}
-                                </div> : null}
-                            <div className="alert-text">
-                                {weatherData.weather ? <p>{weatherData.weather[0].description}</p> : null}
-                            </div>
-                        </div>
-                    </div>
+                    <WeatherAlerts 
+                        currentWeather={weatherData}
+                        forecastData={forecastData}
+                    />
                 </div>
 
 

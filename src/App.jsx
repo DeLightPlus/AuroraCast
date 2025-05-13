@@ -24,6 +24,7 @@ import Search from './components/Search/Search.jsx';
 import CloudsSun from './components/Loaders/CloudsSun.jsx';
 import SkeletonLoader from './components/Loaders/SkeletonLoader.jsx';
 import VerticalLineLoader from './components/Loaders/VerticalLineLoader.jsx';
+import WeatherMap from './components/WeatherMap/WeatherMap.jsx';
 
 
 const api = {
@@ -51,6 +52,7 @@ const WeatherApp = () => {
 
   const [showTermsOfService, setShowTermsOfService] = useState(false);
 
+  const defaultLocation = { lat: -25.746111, lon: 28.188056 }; // Default location (Pretoria, South Africa)
   const locations = ['Polokwane', 'Cape Town', 'Johannesburg']; // Add more locations as needed
 
   const handleSearch = () => {
@@ -113,17 +115,12 @@ const WeatherApp = () => {
           <div className="main-body-weather">
             {weatherData ? (
               <>
-                <MainWeatherCard weatherData={weatherData} />
+                <MainWeatherCard 
+                  weatherData={weatherData} 
+                  forecastData={forecastData}
+                />
 
-                <section className="weather-map">
-                  <div className="weather-map-header">
-                    <h2>Weather Map</h2>
-                    <p>{weatherData.name}, {weatherData.sys.country}</p>
-                  </div>
-                  <div className="weather-map-content">
-                    <img src={`https://openweathermap.org/img/wn/${weatherData.weather[0]}`} />
-                  </div>
-                </section>
+                <WeatherMap location={weatherData.coord || defaultLocation} />
               </>              
             ) : (
               <div className="loading-wrapper">
