@@ -26,18 +26,12 @@ const MainWeatherCard = ({ weatherData, forecastData }) => {
                                         {
                                             weatherData.weather ?
                                                 (
-                                                    <strong id='cover-dir'>
-                                                        <div className="wind-dir"
-                                                            style={{ transform: `rotate(${weatherData.wind.deg}deg)` }}>
-                                                            &#11165;
-                                                        </div>
-                                                        <div className="cloud-des">
-                                                            {weatherData.weather[0].description}
-                                                            <div> &#9925; {weatherData.clouds.all}%</div>
-                                                        </div>
-
-
-                                                    </strong>
+                                                    
+                                                    <div className="cloud-des">
+                                                        {weatherData.weather[0].description}
+                                                        <div> &#9925; {weatherData.clouds.all}%</div>
+                                                    </div>
+                                                 
 
                                                 ) : null
                                         }
@@ -48,22 +42,27 @@ const MainWeatherCard = ({ weatherData, forecastData }) => {
 
                         <div className="feels-like">
                             <div className="temp">
-                                {weatherData.main ?  <> {weatherData.main.temp.toFixed()} <span>°C</span> </> : null}
+                                {weatherData.main ? <> {weatherData.main.temp.toFixed()} <span>°C</span> </> : null}
                             </div>
 
                             <div className="feels">
                                 {weatherData.main ? <>Feels Like: <strong className='bold'>{weatherData.main.feels_like.toFixed()}°C</strong></> : null}
-                            </div>
+                            </div>                           
                         </div>
+
+                        <strong id='cover-dir'>
+                            <div className="wind-dir"
+                                style={{ transform: `rotate(${weatherData.wind.deg}deg)` }}>
+                                &#11165;
+                            </div>
+                        </strong>
                     </div>
 
-                    <WeatherAlerts 
+                    <WeatherAlerts
                         currentWeather={weatherData}
                         forecastData={forecastData}
                     />
                 </div>
-
-
 
                 {
                     weatherData.name !== undefined &&

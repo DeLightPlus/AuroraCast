@@ -12,7 +12,7 @@ import TermsOfService from './components/TermsOfService.jsx';
 import MainWeatherCard from './components/Cards/MainWeatherCard/MainWeatherCard.jsx';
 
 import Forecast from './components/Forecast/Forecast.jsx';
-import WeatherCard from './components/Cards/WeatherCardMini/WeatherCardMini.jsx';
+import WeatherCardMini from './components/Cards/WeatherCardMini/WeatherCardMini.jsx';
 
 import useCurrentLocation from './hooks/useCurrentLocation';
 import useWeatherAndForecast from './hooks/useWeatherAndForecast';
@@ -43,6 +43,28 @@ const WeatherApp = () => {
     return saved ? JSON.parse(saved) : [];
   });
 
+  const [savedLocationsWeather, setSavedLocationsWeather] = useState({});
+
+  const fetchWeatherForLocation = async (lat, lon, cityName) => {
+    try {
+      const url = `${api.base}/weather?lat=${lat}&lon=${lon}&units=${tempUnits}&appid=${api.key}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      setSavedLocationsWeather(prev => ({
+        ...prev,
+        [cityName]: data
+      }));
+    } catch (error) {
+      console.error('Failed to fetch weather for location:', error);
+    }
+  };
+
+  useEffect(() => {
+    savedLocations.forEach(location => {
+      fetchWeatherForLocation(location.lat, location.lon, location.cityName);
+    });
+  }, [savedLocations, tempUnits]);
+
   const { location, error:locationError } = useCurrentLocation();
   const { weatherData, forecastData, loading, error } = useWeatherAndForecast(
     customLocation?.latitude || location?.latitude,
@@ -55,24 +77,56 @@ const WeatherApp = () => {
   const defaultLocation = { lat: -25.746111, lon: 28.188056 }; // Default location (Pretoria, South Africa)
   const locations = ['Polokwane', 'Cape Town', 'Johannesburg']; // Add more locations as needed
 
-  const handleSearch = () => {
-    if (searchQuery) {
-      fetchLocationByName(searchQuery);
+  const handleSearch = (query) => {
+    if (query) {
+      fetchLocationByName(query);
+      setSearchQuery(''); // Clear the search query after searching
     }
   };
 
   const fetchLocationByName = async (cityName) => {
     try {
-      const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=${tempUnits}&appid=895284fb2d2c50a520ea537456963d9c`;
+      const url = `${api.base}/weather?q=${cityName}&units=${tempUnits}&appid=${api.key}`;
       const response = await fetch(url);
       const data = await response.json();
 
+      if (data.cod === '404') {
+        console.error('City not found');
+        return;
+      }
+
       setCustomLocation({ latitude: data.coord.lat, longitude: data.coord.lon });
-      const newSavedLocations = [...savedLocations, { cityName, lat: data.coord.lat, lon: data.coord.lon }];
-      setSavedLocations(newSavedLocations);
-      localStorage.setItem('savedLocations', JSON.stringify(newSavedLocations));
+      
+      // Check if location already exists in savedLocations
+      const locationExists = savedLocations.some(loc => loc.cityName.toLowerCase() === cityName.toLowerCase());
+      
+      if (!locationExists) {
+        const newSavedLocations = [...savedLocations, { cityName, lat: data.coord.lat, lon: data.coord.lon }];
+        setSavedLocations(newSavedLocations);
+        localStorage.setItem('savedLocations', JSON.stringify(newSavedLocations));
+      }
     } catch (error) {
       console.error('Failed to fetch location by name:', error);
+    }
+  };
+
+  const handleRemoveLocation = (cityName) => {
+    const newSavedLocations = savedLocations.filter(loc => loc.cityName !== cityName);
+    setSavedLocations(newSavedLocations);
+    localStorage.setItem('savedLocations', JSON.stringify(newSavedLocations));
+    
+    // Remove from weather data
+    setSavedLocationsWeather(prev => {
+      const newWeather = { ...prev };
+      delete newWeather[cityName];
+      return newWeather;
+    });
+  };
+
+  const handleSelectLocation = (cityName) => {
+    const location = savedLocations.find(loc => loc.cityName === cityName);
+    if (location) {
+      setCustomLocation({ latitude: location.lat, longitude: location.lon });
     }
   };
 
@@ -104,11 +158,15 @@ const WeatherApp = () => {
               recentSearches={savedLocations.slice(0, 5)}
             />
             <div className="mini-weather-cards">
-              <WeatherCard name="Polokwane" />
-              <WeatherCard name="Johannesburg" />
-              <WeatherCard name="Bloemfontein" />
-              <WeatherCard name="Durban" />
-              <WeatherCard name="Cape Town" />
+              {savedLocations.map((location, index) => (
+                <WeatherCardMini 
+                  key={index}
+                  name={location.cityName}
+                  weather={savedLocationsWeather[location.cityName]}
+                  onRemove={handleRemoveLocation}
+                  onSelect={handleSelectLocation}
+                />
+              ))}
             </div>
           </div>
 

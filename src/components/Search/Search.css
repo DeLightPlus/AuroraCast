@@ -54,6 +54,12 @@
   opacity: 1;
 }
 
+.search__button{
+  background: none;
+  border: none;
+  padding-left: 4px;
+}
+
 .search__dropdown {
   position: absolute;
   top: calc(100% + 0.5rem);

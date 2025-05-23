@@ -1,4 +1,3 @@
-
 /* Mini weather cards container */
 .mini-weather-cards {
   display: flex;
@@ -9,11 +8,12 @@
   background: var(--background-color);
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-
   flex: 1;
   overflow-x: auto;
   scrollbar-width: none;
   scrollbar-color: var(--accent-color, #4a90e2) var(--background-color, #1a1a1a);
+  position: relative;
+  z-index: 1;
 }
 
 /* Scrollbar styling for WebKit browsers */
@@ -44,6 +44,7 @@
     cursor: pointer;
     width: 100%;
     max-width: 200px;
+    position: relative;
 }
 
 .cardm:hover {
@@ -71,7 +72,6 @@
 
 .cardm .card__details h3 {
     margin: 0;
-    /* margin-right: 0.5rem; */
     font-size: 0.85rem;
     font-weight: 200;
     white-space: nowrap;
@@ -87,7 +87,18 @@
 
 .cardm .card__menu {
     margin-left: 0.5rem;
+}
+
+.cardm .card__menu button {
+    background: none;
+    border: none;
     font-size: 1.2rem;
     color: var(--text-secondary-color, rgba(255, 255, 255, 0.6));
     cursor: pointer;
+    padding: 0.25rem;
+    transition: color 0.2s ease;
+}
+
+.cardm .card__menu button:hover {
+    color: var(--accent-color, #4a90e2);
 }

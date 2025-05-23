@@ -1,17 +1,29 @@
 import React from 'react'
 import './WeatherCardMini.css'
+import weatherIcons from '../../constants.js'
 
-const WeatherCard = ({name}) => {
+const WeatherCardMini = ({ name, weather, onRemove, onSelect }) => {
+    const handleMenuClick = (e) => {
+        e.stopPropagation(); // Prevent card click when clicking menu
+        if (window.confirm(`Are you sure you want to remove ${name}?`)) {
+            onRemove(name);
+        }
+    };
+
     return (
-        <div className="cardm">
-            <div className="card__icon">⛅</div>
+        <div className="cardm" onClick={() => onSelect(name)}>
+            <div className="card__icon">
+                {weather?.weather?.[0]?.icon ? weatherIcons[weather.weather[0].icon] : '⛅'}
+            </div>
             <div className="card__details">
                 <h3>{name}</h3>
-                <p>20℃</p>
+                <p>{weather?.main?.temp ? `${Math.round(weather.main.temp)}°C` : '--'}</p>
             </div>
-            <div className="card__menu">⁝</div>
+            <div className="card__menu">
+                <button onClick={handleMenuClick}>⁝</button>
+            </div>
         </div>
     )
 }
 
-export default WeatherCard
+export default WeatherCardMini

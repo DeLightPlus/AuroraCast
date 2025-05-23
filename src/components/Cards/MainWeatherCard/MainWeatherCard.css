@@ -72,23 +72,27 @@
     align-items: center;
     gap: 8px;
     margin-left: -32px;
+    padding:  16px 0;
 }
 
 #cover-dir {
+    position: absolute;
+    bottom: 32px;
+    right: 16px;
     display: flex;
     height: 32px;
 
     font-size: 14px;
-    margin-right: 10px;
-    margin-left: -36px;
+    /* margin-right: 10px;
+    margin-left: -36px; */
 
     gap: 8px;
 }
 
 #cover-dir .wind-dir {
     position: relative;
-    top: -84px;
-    right: 0px;
+    top: 0;
+    right: 0;
     font-size: 32px;
 }
 
