@@ -138,8 +138,6 @@
   overflow: hidden;
 }
 
-
-
 /* Body sections */
 .main-body-weather {
   display: flex;
@@ -148,7 +146,7 @@
   padding-right: 2rem;
   background: var(--background-color);
   border-radius: 12px;
-    /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); */
+  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); */
 }
 
 .main-body-forecast {
@@ -224,19 +222,19 @@
 
 
 @media (max-width: 480px) {
- 
-  .app-sidebar{
+
+  .app-sidebar {
     display: none;
   }
 
-  
-
-.main-weather-card{
-    height: 100vh;
+  .main-body-weather
+  {
+    margin: 0;
+    flex-direction: column;
   }
 
-  .weather-map{
+  .weather-map {
     display: none;
   }
-  
+
 }

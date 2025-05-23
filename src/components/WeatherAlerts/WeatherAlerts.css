@@ -98,16 +98,17 @@
 @media (max-width: 480px) {
 
 
-  .weather-alerts {
+  .weather-alerts,
+  .weather-alerts  .alert {
     padding: 8px;
+    width: 100%;
   }
-
   .alert-details {
     flex-direction: column;
     gap: 4px;
   }
 
   .weather-map{
-    display: none;
+    display: block;
   }
 } 
