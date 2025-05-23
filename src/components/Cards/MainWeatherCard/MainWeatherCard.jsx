@@ -46,7 +46,7 @@ const MainWeatherCard = ({ weatherData, forecastData }) => {
                             </div>
 
                             <div className="feels">
-                                {weatherData.main ? <>Feels Like: <strong className='bold'>{weatherData.main.feels_like.toFixed()}°C</strong></> : null}
+                                {weatherData.main ? <>Feels Like: <strong className='bold'>{weatherData.main.feels_like.toFixed()}°</strong></> : null}
                             </div>                           
                         </div>
 
@@ -73,9 +73,12 @@ const MainWeatherCard = ({ weatherData, forecastData }) => {
                                 {weatherData.main ?
                                     <>
                                         <div className="h-block">
-                                            <div className="h"> &#127777; Max</div>
+                                            <div className="h"> &#127777; <strong>Max</strong>/<small>min</small></div>
                                             <div className="body">
-                                                <p> {weatherData.main.temp_max.toFixed()}°C </p>
+                                                <p>
+                                                    <strong>{weatherData.main.temp_max.toFixed()}°</strong>/   
+                                                    <small>{weatherData.main.temp_min.toFixed()}° </small>
+                                                </p>
                                             </div>
                                         </div>
                                     </> : null}
@@ -86,9 +89,9 @@ const MainWeatherCard = ({ weatherData, forecastData }) => {
                                     weatherData.wind ?
                                         <>
                                             <div className="h-block">
-                                                <div className="h"> &#127777; Min</div>
+                                                <div className="h"> &#128168; Wind Speed</div>
                                                 <div className="body">
-                                                    <p>  {weatherData.main.temp_min.toFixed()}°C </p>
+                                                    <p>  {weatherData.wind.speed.toFixed()} MPH </p>
                                                 </div>
                                             </div>
                                         </> : null
@@ -135,19 +138,7 @@ const MainWeatherCard = ({ weatherData, forecastData }) => {
                                 }
                             </div>
 
-                            <div className="hl-box">
-                                {
-                                    weatherData.wind ?
-                                        <>
-                                            <div className="h-block">
-                                                <div className="h"> &#128168; Wind Speed</div>
-                                                <div className="body">
-                                                    <p>  {weatherData.wind.speed.toFixed()} MPH </p>
-                                                </div>
-                                            </div>
-                                        </> : null
-                                }
-                            </div>
+                            
                         </div>
                     </div>
                 }

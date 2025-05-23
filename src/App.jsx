@@ -1,7 +1,7 @@
 import './App.css';
 import './components/components.css';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { GlobalSearch } from 'iconsax-react';
 import Header from './components/Header/Header.jsx';
 
@@ -35,6 +35,7 @@ const api = {
 const WeatherApp = () => {
   const [isDark, setTheme] = useState(true);
   const [tempUnits, setTempUnits] = useState(measure_units.metric);
+  const [isLoadingLocation, setIsLoadingLocation] = useState(false);
 
   const [searchQuery, setSearchQuery] = useState('');
   const [customLocation, setCustomLocation] = useState(null);
@@ -130,6 +131,30 @@ const WeatherApp = () => {
     }
   };
 
+  const handleCurrentLocation = useCallback(() => {
+    setIsLoadingLocation(true);
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setCustomLocation({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          });
+          // Update search query to show we're using current location
+          setSearchQuery('Current Location');
+          setIsLoadingLocation(false);
+        },
+        (error) => {
+          console.error('Error getting location:', error);
+          setIsLoadingLocation(false);
+        }
+      );
+    } else {
+      console.error('Geolocation is not supported by this browser.');
+      setIsLoadingLocation(false);
+    }
+  }, []);
+
   if (locationError) { return <div>{locationError}</div>; }
 
   console.log("currentLocation: ", location);
@@ -146,6 +171,8 @@ const WeatherApp = () => {
         setTempUnits={setTempUnits}
         showTermsOfService={showTermsOfService}
         setShowTermsOfService={setShowTermsOfService}
+        onCurrentLocation={handleCurrentLocation}
+        isLoadingLocation={isLoadingLocation}
       />
 
       <div className="app-content">

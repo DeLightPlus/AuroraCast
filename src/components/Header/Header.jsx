@@ -4,10 +4,13 @@ import { getCurrentDate } from "../../api/api.js";
 import DarkModeToggle from "../Switches/DarkModeToggle.jsx";
 import TemperatureToggle from "../Switches/TemperatureToggle.jsx";
 import { Setting2 } from "iconsax-react";
+import CurrentLocationButton from "../CurrentLocationButton/CurrentLocationButton.jsx";
 
 const Header = ({ 
   setTempUnits, 
-  setShowTermsOfService 
+  setShowTermsOfService,
+  onCurrentLocation,
+  isLoadingLocation
 }) => {
   const [openSettings, setOpenSettings] = useState(false);
   const curDate = getCurrentDate();
@@ -45,6 +48,10 @@ const Header = ({
 
       <nav className={`header__nav ${openSettings ? 'header__nav--open' : ''}`}>
         <div className="header__controls">
+          <CurrentLocationButton 
+            onClick={onCurrentLocation} 
+            loading={isLoadingLocation}
+          />
           <DarkModeToggle />
           <button
             className="header__settings-button"

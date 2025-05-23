@@ -7,8 +7,14 @@ const formatDate = (date) => {
   return new Date(date).toLocaleDateString('en-GB', options);
 };
 
+// Function to format the date for tab display
+const formatTabDate = (date) => {
+  const day = date.getDate();
+  const weekday = date.toLocaleString('en-US', { weekday: 'short' });
+  return `${day} ${weekday}`;
+};
+
 const Forecast = ({ forecastData }) => {
-  // Manage active tab state (for daily forecast)
   const [activeDayIndex, setActiveDayIndex] = useState(0);
 
   // Get today's date in dd/mmm/yyyy format
@@ -26,10 +32,11 @@ const Forecast = ({ forecastData }) => {
       if (!dailyForecast.some((day) => day.date === dayString)) {
         dailyForecast.push({
           date: dayString,
-          hourlyData: [entry], // Add the current entry to the hourly data for this day
-          maxTemp: entry.main.temp_max, // Store max temperature for the day
-          minTemp: entry.main.temp_min, // Store min temperature for the day
-          dayOfWeek: date.toLocaleString('en-US', { weekday: 'short' }) // Get the day of the week
+          dateObj: date,
+          hourlyData: [entry],
+          maxTemp: entry.main.temp_max,
+          minTemp: entry.main.temp_min,
+          dayOfWeek: date.toLocaleString('en-US', { weekday: 'short' })
         });
       } else {
         // If the day already exists, add the entry to that day
@@ -46,43 +53,27 @@ const Forecast = ({ forecastData }) => {
   // Get grouped forecast data
   const dailyForecasts = groupForecastByDay();
 
-  // Function to handle tab change
-  const handleTabChange = (index) => {
-    setActiveDayIndex(index);
-  };
-
   return (
-    <div>
-      {/* Tabs for each day's forecast */}
+    <div className="forecast">
       <div className="tabs">
-        {dailyForecasts.map((day, index) => {
-          const isToday = day.date === today; // Check if the day is today
-
-          return (
-            <button
-              key={index}
-              className={`tab-button ${activeDayIndex === index ? 'active' : ''}`}
-              onClick={() => handleTabChange(index)}
-            >
-              {
-                isToday ? (
-                  <>
-                    <p>Today</p>
-                    <p>{`⬆${day.maxTemp.toFixed(0)}°C`} {`⬇${day.minTemp.toFixed(0)}°C`}</p>
-                  </>
-                ) : (
-                  <>
-                    <p>{`${new Date(day.date).getDate()} ${day.dayOfWeek}`}</p>
-                    <p>{`⬆${day.maxTemp.toFixed(0)}°C`} {`⬇${day.minTemp.toFixed(0)}°C`}</p>
-                  </>
-                )
-              }
-            </button>
-          );
-        })}
+        {dailyForecasts.map((day, index) => (
+          <button
+            key={day.date}
+            className={`tab-button ${index === activeDayIndex ? 'active' : ''}`}
+            onClick={() => setActiveDayIndex(index)}
+          >
+            {day.date === today ? (
+              'Today'
+            ) : (
+              <>
+                <span className="tab-date">{formatTabDate(day.dateObj)}</span>
+                <span className="tab-temp">| {Math.round(day.maxTemp)}°</span>
+              </>
+            )}
+          </button>
+        ))}
       </div>
 
-      {/* Content for the active tab */}
       {dailyForecasts[activeDayIndex] && (
         <div className="forecast-content">
           <h2>Weather for {dailyForecasts[activeDayIndex].date}</h2>
@@ -91,7 +82,10 @@ const Forecast = ({ forecastData }) => {
           <div className="summary-card-horizontal">
             <div className="summary-item">
               <span role="img" aria-label="thermometer">🌡️</span>
-              <strong>{Math.round(dailyForecasts[activeDayIndex].hourlyData[0].main.temp)}°C</strong>
+              <div>
+                <strong>{Math.round(dailyForecasts[activeDayIndex].maxTemp)}°C</strong>
+                <small> / {Math.round(dailyForecasts[activeDayIndex].minTemp)}°C</small>
+              </div>
             </div>
             <div className="summary-item">
               <span role="img" aria-label="humidity">💧</span>
@@ -114,6 +108,7 @@ const Forecast = ({ forecastData }) => {
               <div key={idx} className="hourly-card">
                 <p>{new Date(entry.dt * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
                 <p>{Math.round(entry.main.temp)}°C</p>
+                <p>{entry.weather[0].description}</p>
               </div>
             ))}
           </div>
