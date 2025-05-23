@@ -1,103 +1,204 @@
+.forecast {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 4px;
+  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+  margin: 8px 0;
+}
+
 /* Tabs styles */
 .tabs {
   display: flex;
-  justify-content: space-around;
-  margin-bottom: 2px;
+  gap: 10px;
+  margin-bottom: 0px;
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+  padding-left: 16px ;
+  padding-bottom: 0px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-color) transparent;
 }
 
 .tabs::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  height: 6px;
+}
+
+.tabs::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.tabs::-webkit-scrollbar-thumb {
+  background-color: var(--accent-color);
+  border-radius: 3px;
 }
 
 .tab-button {
-  flex: 0 0 auto;
-  padding: 8px 16px;
-  margin: 2px;
-  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
-  border-radius: 8px;
-  cursor: pointer;
-  background: rgba(5, 12, 44, 0.336);
-  backdrop-filter: blur(10px);
-  color: white;
-  white-space: nowrap;
-  transition: all 0.3s ease;
   display: flex;
   align-items: center;
   gap: 4px;
-  font-size: 14px;
+  padding: 10px 20px;
+  margin: 4px 0;
+  border: none;
+  border-radius: 20px;
+  background: var(--bg-color);
+  color: var(--text-color);
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
 }
 
-.tab-button .tab-date {
-  font-weight: 500;
+.tab-date {
+  font-weight: 600;
 }
 
-.tab-button .tab-temp {
-  color: var(--text-secondary-color, rgba(255, 255, 255, 0.7));
-  font-size: 13px;
+.tab-temp {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.tab-button:hover {
+  background: var(--hover-color);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 }
 
 .tab-button.active {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+  background: var(--bg-color, rgba(255, 255, 255, 0.25));
   color: white;
-  border-color: var(--accent-color, #4a90e2);
-  transform: translateY(2px);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(231, 231, 231, 0.705);
+  border: 1px solid whitesmoke;
 }
 
 .tab-button.active .tab-temp {
-  color: var(--accent-color, #4a90e2);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .forecast-content {
-  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
-  padding: 16px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-radius: 12px;
-  margin-top: 8px;
+  padding: 25px;
+  background: var(--bg-color);
+  border-radius: 15px;
+  box-shadow: 0 2px 4px rgba(163, 163, 163, 0.05);
 }
 
-/* Horizontal summary card with emojis */
-.summary-card-horizontal {
+.forecast-content h2 {
+  margin: 0 0 20px 0;
+  color: var(--text-color);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.forecast-content h3 {
+  margin: 25px 0 15px 0;
+  color: var(--text-color);
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+/* Weather Alert Styles */
+.forecast-alert {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 25px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.forecast-alert:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.alert-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.alert-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+.alert-content {
+  color: var(--text-color);
+}
+
+.alert-main {
+  margin: 0 0 15px 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--text-color);
+}
+
+.alert-details {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 16px;
-  margin-bottom: 20px;
-  padding: 12px;
-  background: rgba(255, 255, 255, 0.05);
+  gap: 12px;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.alert-details span {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 8px 12px;
   border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.alert-details span:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+/* Summary Card Styles */
+.summary-card-horizontal {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 15px;
+  background: var(--card-bg);
+  border-radius: 12px;
+  margin: 20px 0;
+  overflow-x: auto;
 }
 
 .summary-item {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 16px;
-  padding: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  min-width: 120px;
-  justify-content: center;
+  min-width: 100px;
 }
 
 .summary-item span {
-  font-size: 20px;
+  font-size: 1.2rem;
 }
 
-/* Hourly scroll */
+.summary-item strong {
+  font-size: 1rem;
+  color: var(--text-color);
+}
+
+.summary-item small {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+/* Hourly Forecast Styles */
 .hourly-scroll {
   display: flex;
+  gap: 15px;
   overflow-x: auto;
-  gap: 12px;
-  padding: 12px 0;
+  padding: 15px 0;
   scrollbar-width: thin;
-  scrollbar-color: var(--accent-color, #4a90e2) transparent;
-  -webkit-overflow-scrolling: touch;
+  scrollbar-color: var(--accent-color) transparent;
 }
 
 .hourly-scroll::-webkit-scrollbar {
@@ -109,72 +210,117 @@
 }
 
 .hourly-scroll::-webkit-scrollbar-thumb {
-  background-color: var(--accent-color, #4a90e2);
+  background-color: var(--accent-color);
   border-radius: 3px;
 }
 
 .hourly-card {
-  flex: 0 0 auto;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
-  padding: 12px;
-  border-radius: 8px;
+  min-width: 86px;
+  padding: 8px;
+  background: var(--card-bg,  rgba(255, 255, 255, 0.25));
+  border-radius: 12px;
   text-align: center;
-  min-width: 100px;
-  transition: transform 0.2s ease;
+  border: 1px solid  rgba(255, 255, 255, 0.125);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
 }
 
 .hourly-card:hover {
   transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 }
 
 .hourly-card p {
-  margin: 4px 0;
-  font-size: 14px;
+  margin: 8px 0;
+  color: var(--text-color);
 }
 
 .hourly-card p:first-child {
-  color: var(--text-secondary-color, rgba(255, 255, 255, 0.7));
+  font-weight: 600;
+  font-size: 1.1rem;
 }
 
-/* Mobile Responsive Styles */
+.hourly-card p:nth-child(2) {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--accent-color);
+}
+
+.hourly-card p:last-child {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* Mobile Responsiveness */
 @media (max-width: 768px) {
-  .summary-card-horizontal {
-    gap: 8px;
-  }
-
-  .summary-item {
-    min-width: calc(50% - 8px);
-    font-size: 14px;
-  }
-
-  .summary-item span {
-    font-size: 18px;
-  }
-
-  .hourly-card {
-    min-width: 80px;
-    padding: 8px;
-  }
-
-  .hourly-card p {
-    font-size: 12px;
+  .forecast {
+    padding: 15px;
+    margin: 15px 0;
   }
 
   .forecast-content {
+    padding: 20px;
+  }
+
+  .forecast-content h2 {
+    font-size: 1.3rem;
+  }
+
+  .tab-button {
+    padding: 8px 16px;
+  }
+
+  .hourly-card {
+    min-width: 90px;
     padding: 12px;
   }
 }
 
 @media (max-width: 480px) {
-  .summary-item {
-    min-width: 100%;
+  .forecast {
+    padding: 12px;
+    margin: 10px 0;
+  }
+
+  .forecast-content {
+    padding: 15px;
+  }
+
+  .forecast-content h2 {
+    font-size: 1.2rem;
   }
 
   .tab-button {
     padding: 6px 12px;
-    font-size: 14px;
+    font-size: 0.85rem;
+  }
+
+  .hourly-card {
+    min-width: 80px;
+    padding: 10px;
+  }
+
+  .alert-details {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .alert-details span {
+    width: 100%;
+    text-align: center;
+    padding: 6px 10px;
+  }
+
+  .hourly-card p:first-child {
+    font-size: 1rem;
+  }
+
+  .hourly-card p:nth-child(2) {
+    font-size: 1.1rem;
+  }
+
+  .hourly-card p:last-child {
+    font-size: 0.8rem;
   }
 }
   

@@ -102,10 +102,14 @@
 
 /* Sidebar styles */
 .app-sidebar {
+  display: flex;
   flex: 0 0 50px;
   /* Fixed width for the sidebar */
   background: var(--background-color);
 }
+
+
+
 
 /* Main content area */
 .app-main {
@@ -214,4 +218,25 @@
 
 .search-container .search {
   flex: 1;
+}
+
+
+
+
+@media (max-width: 480px) {
+ 
+  .app-sidebar{
+    display: none;
+  }
+
+  
+
+.main-weather-card{
+    height: 100vh;
+  }
+
+  .weather-map{
+    display: none;
+  }
+  
 }

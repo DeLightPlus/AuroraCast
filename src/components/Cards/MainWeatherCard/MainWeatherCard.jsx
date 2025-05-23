@@ -2,7 +2,7 @@ import { useState } from "react";
 import weatherIcons from "../../constants.js";
 
 import './MainWeatherCard.css';
-import WeatherAlerts from "../../WeatherAlerts.jsx";
+import WeatherAlerts from "../../WeatherAlerts/WeatherAlerts.jsx";
 
 const MainWeatherCard = ({ weatherData, forecastData }) => {
     // { console.log('weatherData', weatherData) }      

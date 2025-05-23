@@ -36,7 +36,11 @@ const Forecast = ({ forecastData }) => {
           hourlyData: [entry],
           maxTemp: entry.main.temp_max,
           minTemp: entry.main.temp_min,
-          dayOfWeek: date.toLocaleString('en-US', { weekday: 'short' })
+          dayOfWeek: date.toLocaleString('en-US', { weekday: 'short' }),
+          weather: entry.weather[0],
+          humidity: entry.main.humidity,
+          windSpeed: entry.wind.speed,
+          pressure: entry.main.pressure
         });
       } else {
         // If the day already exists, add the entry to that day
@@ -52,6 +56,30 @@ const Forecast = ({ forecastData }) => {
 
   // Get grouped forecast data
   const dailyForecasts = groupForecastByDay();
+
+  const renderWeatherAlert = (day) => {
+    const isToday = day.date === today;
+    return (
+      <div className="forecast-alert">
+        <div className="alert-header">
+          <span role="img" aria-label="weather">🌤️</span>
+          <h3>{isToday ? 'Current Weather' : 'Weather Forecast'}</h3>
+        </div>
+        <div className="alert-content">
+          <p className="alert-main">
+            {day.weather.description.charAt(0).toUpperCase() + day.weather.description.slice(1)} with temperatures ranging from {Math.round(day.minTemp)}°C to {Math.round(day.maxTemp)}°C
+          </p>
+          <div className="alert-details">
+            <span>High: {Math.round(day.maxTemp)}°C</span>
+            <span>Low: {Math.round(day.minTemp)}°C</span>
+            <span>Wind: {Math.round(day.windSpeed)} m/s</span>
+            <span>Humidity: {day.humidity}%</span>
+            <span>Pressure: {day.pressure} hPa</span>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div className="forecast">
@@ -78,28 +106,9 @@ const Forecast = ({ forecastData }) => {
         <div className="forecast-content">
           <h2>Weather for {dailyForecasts[activeDayIndex].date}</h2>
           
-          {/* Horizontal summary */}
-          <div className="summary-card-horizontal">
-            <div className="summary-item">
-              <span role="img" aria-label="thermometer">🌡️</span>
-              <div>
-                <strong>{Math.round(dailyForecasts[activeDayIndex].maxTemp)}°C</strong>
-                <small> / {Math.round(dailyForecasts[activeDayIndex].minTemp)}°C</small>
-              </div>
-            </div>
-            <div className="summary-item">
-              <span role="img" aria-label="humidity">💧</span>
-              <strong>{dailyForecasts[activeDayIndex].hourlyData[0].main.humidity}%</strong>
-            </div>
-            <div className="summary-item">
-              <span role="img" aria-label="wind">🌬️</span>
-              <strong>{dailyForecasts[activeDayIndex].hourlyData[0].wind.speed} m/s</strong>
-            </div>
-            <div className="summary-item">
-              <span role="img" aria-label="pressure">⚖️</span>
-              <strong>{dailyForecasts[activeDayIndex].hourlyData[0].main.pressure} hPa</strong>
-            </div>
-          </div>
+          {/* Weather Alert */}
+          {renderWeatherAlert(dailyForecasts[activeDayIndex])}        
+          
 
           {/* Hourly forecast */}
           <h3>Hourly Forecast</h3>

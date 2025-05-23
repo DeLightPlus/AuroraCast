@@ -35,21 +35,6 @@
     gap: 8px;
 }
 
-.weather-alerts {
-    margin-right: 32px;
-    padding: 16px;   
-    background-color: #001e4131;
-    font-size: small;
-    border-radius: 8px;
-}
-
-.alert {
-    display: flex;
-    flex-direction: column;
-    padding: 8px;
-}
-
-
 .temp-N-other-details .temp-N-clouds {
     width: 320px;
     height: 187px;
@@ -138,7 +123,7 @@
     background: rgba(215, 228, 228, 0.993);
     border-radius: 8px;
     border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    /* border-top-right-radius: 0; */
 }
 
 
