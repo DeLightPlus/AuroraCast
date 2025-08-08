@@ -1,22 +1,41 @@
 import React from 'react';
 import './CurrentLocationButton.css';
+import { LocateFixed, MapPin } from 'lucide-react';
+import { useAppContext } from '../../context/AppContext.jsx';
 
-const CurrentLocationButton = ({ onClick, loading }) => {
+const CurrentLocationButton = ({ loading, temperature }) => {
+  const { currentLocation, handleSetDefaultLocation } = useAppContext(); 
+
+  const handleClick = () => {
+    if (currentLocation) {
+      handleSetDefaultLocation(currentLocation);
+    }
+  };
+
   return (
-    <button 
+    <button
       className="current-location-button"
-      onClick={onClick}
+      onClick={handleClick}
       disabled={loading}
-      title="Get current location"
+      title="Set default to current location"
     >
       {loading ? (
         <span className="loading-spinner"></span>
       ) : (
-        <span role="img" aria-label="current location">📍</span>
+        <>
+          {currentLocation ? (
+            <>
+              <LocateFixed size={14} /> {temperature}
+            </>
+          ) : (
+            <>
+              <MapPin size={14} /> {temperature}
+            </>
+          )}
+        </>
       )}
-      {/* <span className="button-text">Current Location</span> */}
     </button>
   );
 };
 
-export default CurrentLocationButton; 
+export default CurrentLocationButton;

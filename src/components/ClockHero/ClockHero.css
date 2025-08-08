@@ -1,0 +1,152 @@
+/* Layout container */
+.clock-hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 97%;
+    padding: 0.25rem 1rem 2rem 1rem;
+    margin-bottom: 4rem ;
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+    text-align: center;
+}
+
+/* Main content */
+.clock-hero__content {    
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Location heading */
+.clock-hero__location {
+    align-self: flex-start;
+    font-size: 1.75rem;
+    font-weight: 300;
+    opacity: 0.9;
+    margin: 0.25rem;
+
+}
+.clock-hero__location span {
+    font-weight: 700;
+    color: var(--accent-color, #f0f7ff);
+}
+
+/* Main time */
+.clock-hero__time {
+  font-family: monospace, 'Courier New';
+  font-size: clamp(4rem, 10vw, 12rem);
+  font-weight: bold;
+  margin: 1.25rem;
+}
+
+/* Date under time */
+.clock-hero__date {
+    width: 60%;
+    align-self: flex-end;
+    font-size: 1.75rem;
+    font-weight: 400;
+    margin: 0;
+    opacity: 0.85;
+    font-family: 'Segoe UI', sans-serif;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Sunrise/sunset/weather info row */
+.clock-hero__info-row {
+    align-self: flex-end;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0.2rem 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.clock-hero__info-row span {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Buttons */
+.clock-hero__button {
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 1px;
+  color: white;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.clock-hero__button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* World clock grid */
+.world-clock-grid {
+    align-self: end;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.25rem;
+    margin-top: 1rem;
+}
+
+.world-clock-column {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 2px;
+    padding: 1rem 1.5rem;
+    min-width: 120px;
+    text-align: center;
+    outline: none;
+    border: none;
+}
+
+.world-clock-city {
+    font-size: 1.75rem;
+    font-weight: 600;
+    text-decoration: underline;
+    font-variant-numeric: tabular-nums;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: var(--text-secondary-color, rgba(255, 255, 255, 0.822));
+    margin-bottom: 0.15rem;
+ 
+}
+
+.world-clock-time {
+    text-align: right;
+    font-size: 1.25rem;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    color: var(--text-secondary-color, rgba(255, 255, 255, 0.822));
+}
+
+/* World list styles */
+.clock-hero__world-list {
+  margin-bottom: 1rem;
+}
+.clock-hero__world-items {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.clock-hero__world-item {
+  background: rgba(255,255,255,0.08);
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+.clock-hero__world-item.selected {
+  background: var(--accent-color, #4a90e2);
+  font-weight: bold;
+}

@@ -1,10 +1,13 @@
 import { useState, useCallback } from "react";
 import "./Header.css";
+
 import { getCurrentDate } from "../../api/api.js";
 import DarkModeToggle from "../Switches/DarkModeToggle.jsx";
 import TemperatureToggle from "../Switches/TemperatureToggle.jsx";
-import { Setting2 } from "iconsax-react";
+
+import { Cloudy, Clock, Locate, LocateFixed, MapPin, Settings, Calendar } from 'lucide-react';
 import CurrentLocationButton from "../CurrentLocationButton/CurrentLocationButton.jsx";
+import { useAppContext } from "../../context/AppContext.jsx";
 
 const Header = ({ 
   setTempUnits, 
@@ -14,6 +17,23 @@ const Header = ({
 }) => {
   const [openSettings, setOpenSettings] = useState(false);
   const curDate = getCurrentDate();
+
+  // Get location and temperature info from context
+  const {
+    currentLocation,
+    defaultLocation,
+    tempUnits,
+    defaultLocationWeather,
+    defaultLocationForecast
+  } = useAppContext();
+
+  // Determine which location to show
+  const hasCurrentLocation = !!currentLocation;
+
+  // Get temperature for the location (prefer currentLocation, fallback to defaultLocation)
+  const temperature = defaultLocationWeather?.main?.temp !== undefined
+    ? `${Math.round(defaultLocationWeather.main.temp)}°${tempUnits === "metric" ? "C" : "F"}`
+    : "--";
 
   const handleTemperatureChange = useCallback((units) => {
     setTempUnits(units);
@@ -29,12 +49,43 @@ const Header = ({
     setOpenSettings(false);
   }, [setShowTermsOfService]);
 
+   const cleanCityName = (name) => {
+    // Remove common suffixes
+    return name
+      .replace(/ Metropolitan Municipality$/i, '')
+      .replace(/ Municipality$/i, '')
+      .replace(/ District$/i, '')
+      .replace(/ City$/i, '')
+      .replace(/ Local Municipality$/i, '')
+      .replace(/ County$/i, '')
+      .trim();
+  };
+
   return (
     <header className="header">
       <div className="header__brand">
-        <h2 className="header__title">Weather(24/7)</h2>
+        <h2 className="header__title"><Cloudy/> AuroraCast</h2>
         <span className="header__datetime">
-          {curDate.day} , {curDate.time}
+          {hasCurrentLocation ? (
+            <>
+              <LocateFixed size={14} /> {cleanCityName(currentLocation.cityName)}
+              {" "}
+              <span className="header__temp">{temperature}</span>
+            </>
+          ) : defaultLocation ? (
+            <>
+              <MapPin size={14} /> {cleanCityName(defaultLocation.cityName)}
+            </>
+          ) : (
+            <>
+              <MapPin size={14} /> "No Location Set"
+              {" "}
+              <span className="header__temp">{temperature}</span>
+            </>
+          )}
+          <br />
+          <Clock size={12} /> {curDate.time} <br />
+          <Calendar size={12} /> {curDate.day}
         </span>
       </div>
 
@@ -51,6 +102,8 @@ const Header = ({
           <CurrentLocationButton 
             onClick={onCurrentLocation} 
             loading={isLoadingLocation}
+            hasCurrentLocation={hasCurrentLocation}
+            temperature={temperature} // <-- Pass temperature as a prop
           />
           <DarkModeToggle />
           <button
@@ -58,7 +111,7 @@ const Header = ({
             onClick={toggleSettings}
             aria-label="Settings"
           >
-            <Setting2 size="32" color="#ffff" />
+            <Settings size="32" color="#ffff" />
             <span className="header__tooltip">Settings</span>
           </button>
         </div>

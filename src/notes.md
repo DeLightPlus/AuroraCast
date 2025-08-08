@@ -1,3 +1,7 @@
+name{
+   DawnCast, AuroraCast, Tick & Drizzle
+}
+
 import React from 'react';
 import './Layout.css'; // Importing the corresponding CSS file
 

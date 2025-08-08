@@ -6,8 +6,8 @@
   gap: 8px;
   padding: 0.25rem;
   background: var(--background-color);
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  /* border-radius: 12px; */
+  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); */
   flex: 1;
   overflow-x: auto;
   scrollbar-width: none;
@@ -36,7 +36,7 @@
     align-items: center;
     justify-content: flex-start;
     background: var(--background-color);
-    padding: 0.35rem 1rem;
+    padding: 0.35rem 0.8rem;
     border-radius: 12px;
     border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
     transition: all 0.3s ease;
@@ -55,7 +55,7 @@
 .cardm .card__icon {
     font-size: 1.5rem;
     opacity: 0.8;
-    margin-right: 0.15rem;
+    margin-right: 0.5rem;
 }
 
 .cardm .card__details {
