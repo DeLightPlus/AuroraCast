@@ -17,7 +17,7 @@
   margin: 0;
   padding: 0;
   color: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Exo' , 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 .WeatherApp {
@@ -94,42 +94,40 @@
 .app-content {
   display: flex;
   flex: 1;
+  margin-left: 40px;
   /* Fills the remaining space below the header */
   overflow: hidden;
   /* Prevents content overflow */
   scrollbar-width: 0px;
 }
 
-/* Sidebar styles */
-.app-sidebar {
-  display: flex;
-  flex: 0 0 50px;
-  /* Fixed width for the sidebar */
-  background: var(--background-color);
-}
-
-
-
-
 /* Main content area */
 .app-main {
   flex: 1;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
-  /* Makes the main content scrollable */
   padding: 0;
+  
+     /* Makes the main content scrollable */
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;  
 
+}
+
+.clock-hero, .main-body-weather, .main-body-forecast {
+  scroll-snap-stop: always; /* Ensure these sections always snap
+  /* height: 100vh; */
+  scroll-snap-align: start; /* Snap each section's top to the viewport top */
 }
 
 /* Sticky header inside the main content */
 .main-header {
   position: sticky;
   top: -1px;
-  z-index: 10;
+  z-index: 1;
   background: linear-gradient(135deg, #1e3b72f5 0%, #2a5298f8 100%,  #1e3b72f5 0%);
-  padding: 2rem;
-  padding-left: 1rem;
+  padding: 1.25rem 1.125rem 1.25rem 1rem;
+  /* padding-left: 1rem; */
   /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
 
   display: flex;
@@ -138,12 +136,24 @@
   overflow: hidden;
 }
 
+.clock-hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    min-height: 86%;
+    padding: 3rem 0rem 0rem 1rem;
+    
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+    text-align: center;
+}
+
 /* Body sections */
 .main-body-weather {
   display: flex;
-  margin-top: 1rem;
-  padding: 1rem;
-  padding-right: 2rem;
+  padding: 5rem 2.5rem 1rem 2rem;
+
   background: var(--background-color);
   border-radius: 12px;
   /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); */
@@ -152,12 +162,15 @@
 .main-body-forecast {
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  padding: 2rem 1rem 1rem 1rem;
+  margin-bottom: 1rem;
   background: var(--background-color);
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-
   width: 75%;
+  min-width: 768px;
+
+  font-family: 'Exo';
 }
 
 /* Loading container */
@@ -199,12 +212,12 @@
 /* Weather map styles */
 .weather-map {
   width: 300px;
-  height: 256px;
+  height: 276px;
   margin-top: 1rem;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  z-index: 1;
+  z-index: 0;
 }
 
 .search-container {
@@ -221,16 +234,17 @@
 
 
 
-@media (max-width: 480px) {
-
-  .app-sidebar {
-    display: none;
-  }
+@media (max-width: 768px) {   
 
   .main-body-weather
   {
     margin: 0;
     flex-direction: column;
+    padding: 3rem 0.75rem 0rem 0.75rem;
+  }  
+
+  .app-content{
+    margin-left: 0;
   }
 
   .weather-map {

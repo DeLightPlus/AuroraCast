@@ -4,6 +4,7 @@
   padding: 4px;
   /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
   margin: 8px 0;
+   backdrop-filter: blur(100px);
 }
 
 /* Tabs styles */
@@ -13,7 +14,7 @@
   margin-bottom: 0px;
   overflow-x: auto;
   padding-left: 16px ;
-  padding-bottom: 0px;
+  padding-bottom: 4px;
   scrollbar-width: thin;
   scrollbar-color: var(--accent-color) transparent;
 }
@@ -33,50 +34,80 @@
 
 .tab-button {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 4px;
-  padding: 10px 20px;
-  margin: 4px 0;
+  justify-content: space-between;
+  padding: 10px 12px;
+  width: 86px;
+  min-width: 64px;
+  border-radius: 18px;
   border: none;
-  border-radius: 20px;
-  background: var(--bg-color);
-  color: var(--text-color);
+  background: rgba(255, 255, 255, 0.06);
+  color: white;
   cursor: pointer;
-  white-space: nowrap;
-  font-size: 0.9rem;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
-}
-
-.tab-date {
-  font-weight: 600;
-}
-
-.tab-temp {
-  color: var(--text-muted);
-  font-size: 0.85rem;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .tab-button:hover {
-  background: var(--hover-color);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
 }
 
 .tab-button.active {
-  background: var(--bg-color, rgba(255, 255, 255, 0.25));
-  color: white;
-  transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(231, 231, 231, 0.705);
-  border: 1px solid whitesmoke;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
-.tab-button.active .tab-temp {
-  color: rgba(255, 255, 255, 0.9);
+.tab-top {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: white;
 }
+
+/* .tab-icon {
+  display: flex;
+  gap: 4px;
+} */
+.tab-icon-N-temps{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px
+}
+
+
+.tab-icon{
+  font-size: 30px;
+}
+
+.tab-icon img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  margin: 4px 0;
+
+}
+
+.tab-temps {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.tab-temps .low-temp {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
 
 .forecast-content {
-  padding: 25px;
+  padding: 8px 16px;
   background: var(--bg-color);
   border-radius: 15px;
   box-shadow: 0 2px 4px rgba(163, 163, 163, 0.05);

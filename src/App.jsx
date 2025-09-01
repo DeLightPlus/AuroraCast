@@ -16,6 +16,8 @@ import ClockHero from './components/ClockHero/ClockHero.jsx';
 import SetDefaultLocationModal from './components/Modals/SetDefaultLocationModal.jsx';
 
 import { useAppContext } from './context/AppContext.jsx';
+import Sidebar from './components/Sidebar/Sidebar.jsx';
+import { useEffect, useRef, useState } from 'react';
 
 const WeatherApp = () => {
   const {
@@ -26,6 +28,22 @@ const WeatherApp = () => {
     handleSearch, handleRemoveLocation, handleSelectLocation, handleCurrentLocation,
     defaultLocation, handleSetDefaultLocation
   } = useAppContext();
+
+  const heroRef = useRef();
+  const [isAtHero, setIsAtHero] = useState(true);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsAtHero(entry.isIntersecting),
+      { threshold: 0.5 }
+    );
+    if (heroRef.current) observer.observe(heroRef.current);
+    return () => observer.disconnect();
+  }, []);  
+
+  console.log(isAtHero);
+  
+  
 
   // Show modal if no default location
   if (!defaultLocation) {
@@ -50,10 +68,11 @@ const WeatherApp = () => {
         setShowTermsOfService={setShowTermsOfService}
         onCurrentLocation={handleCurrentLocation}
         isLoadingLocation={isLoadingLocation}
+        isAtHero={isAtHero}
       />
 
       <div className="app-content">
-        <div className="app-sidebar"></div>
+        <Sidebar/>
 
         <div className="app-main">
           <div className="main-header">
@@ -75,7 +94,10 @@ const WeatherApp = () => {
             </div>
             }
           </div>
-          <ClockHero />
+          
+          <section ref={heroRef} className="clock-hero">
+            <ClockHero isAtHero={isAtHero}/>
+          </section>
 
           <div className="main-body-weather">
             {weatherData ? (
