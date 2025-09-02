@@ -1,6 +1,6 @@
 .main-weather-card {
     /* flex: 1; */
-    max-width: 640px;
+    max-width: 580px;
     /* max-height: 300px; */
 
     display: flex;

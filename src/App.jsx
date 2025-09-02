@@ -18,6 +18,7 @@ import SetDefaultLocationModal from './components/Modals/SetDefaultLocationModal
 import { useAppContext } from './context/AppContext.jsx';
 import Sidebar from './components/Sidebar/Sidebar.jsx';
 import { useEffect, useRef, useState } from 'react';
+import AdPlaceholder from './components/Cards/AdPlaceholder/AdPlaceholder.jsx';
 
 const WeatherApp = () => {
   const {
@@ -106,7 +107,10 @@ const WeatherApp = () => {
                   weatherData={weatherData} 
                   forecastData={forecastData}
                 />
-                <WeatherMap location={weatherData.coord} />
+                <div className='map-N-ad'> 
+                  <WeatherMap location={weatherData.coord} />
+                  <AdPlaceholder />
+                </div>
               </>              
             ) : (
               <div className="loading-wrapper">

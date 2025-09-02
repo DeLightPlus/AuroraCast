@@ -108,7 +108,8 @@
   flex-direction: column;
   padding: 0;
   
-     /* Makes the main content scrollable */
+  /* Makes the main content scrollable */
+  overflow-x: clip;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;  
 
@@ -151,23 +152,30 @@
 
 /* Body sections */
 .main-body-weather {
-  display: flex;
-  padding: 5rem 2.5rem 1rem 2rem;
+  display: flex; 
+  padding: 5rem 1.5rem 1rem 2rem;
 
   background: var(--background-color);
   border-radius: 12px;
   /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); */
 }
 
+.map-N-ad{
+  display: flex;
+}
+
+
+
 .main-body-forecast {
   display: flex;
   flex-direction: column;
-  padding: 2rem 1rem 1rem 1rem;
+  padding: 2rem 0rem 1rem 1rem;
   margin-bottom: 1rem;
   background: var(--background-color);
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); */
   width: 75%;
+  max-width: max-content;
   min-width: 768px;
 
   font-family: 'Exo';
@@ -211,8 +219,9 @@
 
 /* Weather map styles */
 .weather-map {
-  width: 300px;
-  height: 276px;
+  min-width: 256px;
+  width: 256px;
+  height: 256px;
   margin-top: 1rem;
   border-radius: 8px;
   overflow: hidden;
@@ -249,6 +258,13 @@
 
   .weather-map {
     display: none;
+  }
+
+  .main-body-forecast {
+    min-width: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 2rem 0.25rem;
   }
 
 }

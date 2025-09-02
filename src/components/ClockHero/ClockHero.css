@@ -1,10 +1,11 @@
 .clock-hero__map-container {
   position: absolute;
-  left: 6%;
+  left: 0%;
   top: 28%;
-  width: 50%;
-  height: 50%;
+  width: 64%;
+  height: 64%;
   transition: all 0.5s ease;
+  z-index: -1;
 }
 
 .clock-hero__map-container.atHero {
@@ -53,10 +54,10 @@
 .clock-hero__time {
   min-width: 500px;
   font-family: 'Orbitron', sans-serif, 'Courier New';
-  font-size: clamp(4rem, 12vw, 16rem);
+  font-size: clamp(4rem, 10vw, 16rem);
   font-weight: bolder;
   margin: 1.25rem;
-  letter-spacing: clamp(0.05rem, 0.25vw, 1rem);  
+  letter-spacing: clamp(0.05rem, 0.25vw, 1.25rem);  
 }
 
 /* Date under time */
@@ -94,16 +95,18 @@
 
 /* Buttons */
 .clock-hero__button {
-  background: rgba(18, 63, 122, 0.75);
-  border: none;
+  background: rgba(18, 63, 122, 0.75);  
   padding: 0.4rem 0.8rem;
   border-radius: 1px;
   color: white;
   font-size: 1.25rem;
+  font-family: 'Exo', sans-serif;
   cursor: pointer;
   transition: background 0.2s;  
   backdrop-filter: blur(50px);
-  font-family: 'Exo', sans-serif;
+  border: 1px solid  rgba(255, 255, 255, 0.125);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25); 
+
 }
 
 .clock-hero__button:hover {
@@ -123,12 +126,14 @@
 .world-clock-column {
   background: rgba(18, 63, 122, 0.5);
   border-radius: 2px;
-  padding: 1rem 1.5rem;
+  padding: 0.5rem;
   min-width: 120px;
   text-align: center;
   outline: none;
   border: none;
   backdrop-filter: blur(50px);
+  border: 1px solid  rgba(255, 255, 255, 0.125);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
 }
 
 .world-clock-city {
@@ -180,15 +185,31 @@
 
 
 @media (max-width: 768px) {
-  .clock-hero__map-container {
+  /* .clock-hero__map-container {
     left: 5%;
     top: 20%;
     width: 86%;
 
+  } */
+
+  .clock-hero__map-container {
+    position: absolute;
+    left: 5%;
+    top: 8%;
+    width: 100%;
+    height: 100%;
+    padding: 8%;
+    transition: all 0.5s ease;
+  }
+  
+  .clock-hero__map-container.atHero {
+    top: 0%;
+    left: 0%;
+    transition: all 0.5s ease;
   }
 
   .clock-hero {
-    padding: 0.1rem 0rem 2rem 0rem;
+    padding: 3rem 0rem 2rem 0rem;
     max-width: 100%;
     min-height: 80vh;
   }
@@ -206,9 +227,11 @@
 
   .clock-hero__content {    
     align-self: flex-start;
+    padding: 0;
     height: 100%;
     background: linear-gradient(#223f76c5, #f0f7ff00);
-    justify-content: space-around;
+    justify-content: center;
+    align-items: center;
   }
 
   .clock-hero__content .clock-hero__location {

@@ -1,0 +1,29 @@
+/* AdPlaceholder.css */
+.ad-placeholder {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 16px;
+    border-radius: 12px;
+    color: var(--text-color);
+    font-size: 0.95rem;
+    max-width: 280px;
+    max-height: 256px;
+    margin: 16px 0 0 16px ;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+
+    overflow: hidden;
+  }
+  
+  .ad-placeholder:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .ad-placeholder h4 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    color: var(--accent-color);
+  }
+  

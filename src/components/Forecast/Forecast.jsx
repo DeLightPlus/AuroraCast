@@ -63,7 +63,7 @@ const Forecast = ({ forecastData }) => {
     return (
       <div className="forecast-alert">
         <div className="alert-header">
-          <span role="img" aria-label="weather">🌤️</span>
+          {/* <span role="img" aria-label="weather">🌤️</span> */}
           <h3>{isToday ? 'Current Weather' : 'Weather Forecast'}</h3>
         </div>
         <div className="alert-content">
@@ -71,11 +71,11 @@ const Forecast = ({ forecastData }) => {
             {day.weather.description.charAt(0).toUpperCase() + day.weather.description.slice(1)} with temperatures ranging from {Math.round(day.minTemp)}°C to {Math.round(day.maxTemp)}°C
           </p>
           <div className="alert-details">
-            <span>High: {Math.round(day.maxTemp)}°C</span>
-            <span>Low: {Math.round(day.minTemp)}°C</span>
-            <span>Wind: {Math.round(day.windSpeed)} m/s</span>
-            <span>Humidity: {day.humidity}%</span>
-            <span>Pressure: {day.pressure} hPa</span>
+            <span title="High Temp">🌡️ {Math.round(day.maxTemp)}°C</span>
+            <span title="Low Temp">❄️ {Math.round(day.minTemp)}°C</span>
+            <span title="Wind Speed">💨 {Math.round(day.windSpeed)} m/s</span>
+            <span title="Humidity">💧 {day.humidity}%</span>
+            <span title="Pressure">🌬️ {day.pressure} hPa</span>
           </div>
         </div>
       </div>
@@ -94,10 +94,10 @@ const Forecast = ({ forecastData }) => {
             <div className="tab-top">{day.date === today ? 'Today' : formatTabDate(day.dateObj)}</div>
             
             <div className="tab-icon-N-temps">              
-              <div className="tab-icon">
-                {/* {weatherIcons[day.weather[0].icon]} */}
-                ⛅
-              </div>
+            <div className="tab-icon">
+              {weatherIcons[day.weather.icon] || '⛅'}
+            </div>
+
 
               <div className="tab-temps">
                 <span>{Math.round(day.maxTemp)}°</span>
