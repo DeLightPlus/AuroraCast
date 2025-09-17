@@ -17,7 +17,7 @@
   margin: 0;
   padding: 0;
   color: #fff;
-  font-family: 'Exo' , 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 .WeatherApp {
@@ -162,23 +162,35 @@
 
 .map-N-ad{
   display: flex;
+  align-items: center;
+  gap: 32px
 }
 
 
 
 .main-body-forecast {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 10px;
+
   padding: 2rem 0rem 1rem 1rem;
   margin-bottom: 1rem;
   background: var(--background-color);
   border-radius: 12px;
   /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); */
-  width: 75%;
-  max-width: max-content;
-  min-width: 768px;
+  width: 100%;
 
   font-family: 'Exo';
+}
+
+.smart-feeds {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+
+  width: 100%;
 }
 
 /* Loading container */
